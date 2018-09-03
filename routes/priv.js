@@ -19,7 +19,7 @@ router.get('/private', checkRoles('tim','jason'), (req, res) => {
 router.get('/delete/:id', (req, res) => {
   Event.findByIdAndRemove(req.params.id)
     .then(result => {
-      res.redirect('private')
+      res.redirect('/priv/private')
     })
     .catch(console.error)
 })
