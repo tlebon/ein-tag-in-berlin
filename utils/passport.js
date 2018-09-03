@@ -24,17 +24,17 @@ passport.deserializeUser((id, cb) => {
 passport.use(
     new LocalStrategy(
         {
-            usernameField: 'email',
+            usernameField: 'username',
             passwordField: 'password',
         },
-        function(email, password, done) {
-            User.findOne({ email }, function(err, user) {
+        function(username, password, done) {
+            User.findOne({ username }, function(err, user) {
                 if (err) {
                     return done(err)
                 }
 
                 if (!user) {
-                    return done(null, false, { message: 'Incorrect email.' })
+                    return done(null, false, { message: 'Incorrect username.' })
                 }
 
                 if (!user.password) {
