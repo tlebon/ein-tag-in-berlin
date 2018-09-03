@@ -75,29 +75,58 @@ router.post("/events/add", ensureLoggedIn("/sign-in"), (req, res, next) => {
     });
 });
 
-router.get("/events/addRA", (req, res, next) => {
-  // apifyAPI.send('look this way for Resident Advisor Adds')
-  getRACrawl();
-});
-
+const apifyAPIStart = `https://api.apify.com/v1/5EyWPb2cncNhD7hhm/crawlers/mJNiod6QQFmhSBLio/execute?token=Pu5WZ7o5t3PdfsTPCSuwXb55Z`;
 const apifyAPI = axios.create({
   baseURL: "https://api.apify.com/v1/5EyWPb2cncNhD7hhm/crawlers/mJNiod6QQFmhSBLio/lastExec/results?token=iXiFD2vg3SKvnHs9NEY3bPz9M"
 });
+router.get("/events/addRA", (req, res, next) => {
+  res.render("addRA");
+  //  getRACrawl();
+});
 
-function getRACrawl() {
-    apifyAPI
-    .get()
-    .then(response => {
-        let results=[]
-        response.data.forEach(el => {
-            // console.log(el.pageFunctionResult, `el: `)
-            results.push(el.pageFunctionResult)
-        });
-      console.log(results,`done`);
+router.get("/startCrawl", (req, res, next) => {
+  console.log(`I would like to start the crawl...`)
+  axios.post(apifyAPIStart)
+  .then(() =>{console.log(`crawl started`)})
+//   res.send('crawl started maybe?');
+  // getRACrawl();
+});
+
+router.get("/events/addRAresults", (req, res, next) => {
+apifyAPI.get().then(response=> {
+    let results = [];
+    response.data.forEach(el => {
+        results.push(el.pageFunctionResult);
     })
-    .catch(err => {
-      console.error(err);
-    });
-}
+    // results = results.shift();
+    console.log(results.length, typeof(results),results)
+    Event.create(results, (err) =>{
+        if (err) {throw(err) }
+        console.log(`Created`)
+    })
+    
+})
+    //    getRACrawl()
+//    res.send('check console')
+});
+
+// function getRACrawl() {
+//   apifyAPI
+//     .get()
+//     .then(response => {
+//       let results = [];
+//       response.data.forEach(el => {
+//         // console.log(el.pageFunctionResult, `el: `)
+//         results.push(el.pageFunctionResult);
+//       })
+//       Event.create(results, (err) => {
+//           if (err) {throw(err) }
+//           console.log(`Created ${results.length} events`)
+//       });
+//     //   console.log(results, `done`);
+//     })
+//     return results;
+//     ;
+// }
 //HERE"S A COMMENT
 module.exports = router;
