@@ -2,54 +2,28 @@ const express = require('express');
 const router = express.Router();
 const ensureLogin = require('connect-ensure-login')
 router.use(ensureLogin.ensureLoggedIn('/sign-in'))
-const User = require('../models/User')
+const Event= require('../models/Event')
 const bcrypt = require('bcrypt')
+const User = require('../models/User')
 
-/* GET home page */
-router.get('/', (req, res, next) => {
-  res.render('index');
-});
 
 router.get('/private', checkRoles('tim','jason'), (req, res) => {
-  User.find({})
-    .then(users => {
-      res.render('private', { users });
+  Event.find({})
+    .then(events => {
+      res.render('private', { events });
     })
     .catch(console.error)
 })
 
 
 router.get('/delete/:id', (req, res) => {
-  User.findByIdAndRemove(req.params.id)
+  Event.findByIdAndRemove(req.params.id)
     .then(result => {
-      res.redirect('/priv/private')
+      res.redirect('private')
     })
     .catch(console.error)
 })
 
-router.get('/events/add', (req, res, next) => {
-  res.render('create-event')
-})
-
-router.post('/events/add', (req, res, next) => {
-
-  const { email, password, role } = req.body
-
-  const encrypted = bcrypt.hashSync(password, 10)
-
-  new User({ email, password: encrypted, role })
-      .save()
-      .then(result => {
-          res.redirect('index',{ error: 'Event Created!' })
-      })
-      .catch(err => {
-          if (err.code === 11000) {
-              return res.redirect('index', { error: 'Event Created!' })
-          }
-          console.error(err)
-          res.send('something went wrong')
-      })
-})
 
 function checkRoles(role) {
   return function (req, res, next) {

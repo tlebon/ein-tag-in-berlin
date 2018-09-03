@@ -1,22 +1,27 @@
 <div class="container">
   <div class="card">
 <h2>Add an Event!</h2>
-<form action="/priv/events/add" method="POST">
-  <label for="">Name</label>
+<form action="/events/add" method="POST">
+  <label for="name">Name</label>
   <input type="text" name="name">
 <br>
-  <label for="">Time</label>
+ <label for="date">Date</label>
+  {{!-- <input type="text" name="date" placeholder="day/month/year"> --}}
+  <input placeholder="Date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="date">
+<br>
+  <label for="time">Time</label>
   <input type="text" name="time">
 <br>
-  <label for="">Location</label>
-  <input type="text" name="location">
+  <label for="address">Address</label>
+  <input type="text" name="address">
 <br>
-  <label for="">Details</label>
-  <input type="text" name="details">
+  <label for="details">Details</label>
+  <textarea type="text" name="details"></textarea>
 <br>
-
+<br>
   <button type="submit">ADD</button>
 </form>
-<a href="/private">Go back</a>
+<br>
+<a href="/"><button>Go back</button></a>
 </div>
 </div>
