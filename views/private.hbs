@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="card">
+        <div class="list-flex">
+            <h1>Current Events</h1>
+            <a href="/priv/event/add"><button>Add an event</button></a>
+        </div>
+        <ul>
+            {{#each event}}   
+            <h3>{{this.name}}</h3>
+             <a href="delete/{{this._id}}">
+            <button class='btn-delete'>This event sucks!</button>
+        </a> {{/each}}
+        </ul>
+<a href="/auth/sign-in">sign in</a>
+<a href="/auth/sign-out">sign out</a>
+
+    </div>
+</div>
