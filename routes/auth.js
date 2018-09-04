@@ -13,7 +13,7 @@ const lastExec = require("../utils/apifycrawler");
 
 //NEEDED FOR DATA MANIPULATION
 const Today = require("../utils/dateSetup");
-const moment = require('moment')
+const moment = require("moment");
 // import {formatDate} from '../utils/dateSetup'
 
 router.get("/sign-up", (req, res, next) => {
@@ -142,13 +142,22 @@ router.get("/delete/all", (req, res) => {
 });
 
 // ADD GEO LOC FIELD
-router.post("/updateall", (req, res) => {
+router.get("/updateall", (req, res) => {
   console.log(`updating some shit`);
-  Event.updateMany({ venue: "Chalet" }, { geoloc: 5 }).then(() => {
+  Event.updateMany(
+    { venue: "Chalet" },
+    {
+      location: {
+        lat: 1,
+        lng: 2
+      }
+    }
+  ).then(() => {
     res.send(`updated`);
   });
 });
 
+// RETURN TODAYS EVENTS!
 function formatDate(date) {
   var monthNames = [
     "Jan",
@@ -174,9 +183,10 @@ function formatDate(date) {
 router.get("/jasonsview", (req, res) => {
   let today = formatDate(new Date());
   console.log(today);
-  Event.find({ date: today}, 'name venue url').then(result => {
-    console.log(`Found ${result.length} events!-----`)
-    res.send(result)});
+  Event.find({ date: today }, "name venue geoloc").then(result => {
+    console.log(`Found ${result.length} events!-----`);
+    res.send(result);
+  });
 });
 
 module.exports = router;
