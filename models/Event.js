@@ -8,6 +8,9 @@ const eventSchema = new Schema({
   date: String,
   time: String,
   address: String,
+  url: {
+    type: String,
+    unique: true},
   location: {
     lat: Number,
     lng: Number,

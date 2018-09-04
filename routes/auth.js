@@ -7,6 +7,11 @@ const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
 const Event = require("../models/Event");
 //ITEMS NEEDED FOR RA CRAWLER
 const axios = require("axios");
+const startHTML = require('../utils/apifycrawler')
+const resultsHTML = require('../utils/apifycrawler')
+const lastExec = require('../utils/apifycrawler')
+
+
 
 router.get("/sign-up", (req, res, next) => {
   res.render("sign-up");
@@ -75,29 +80,45 @@ router.post("/events/add", ensureLoggedIn("/sign-in"), (req, res, next) => {
     });
 });
 
-router.get("/events/addRA", (req, res, next) => {
-  // apifyAPI.send('look this way for Resident Advisor Adds')
-  getRACrawl();
-});
-
+// axios call for resuls  why is it results.results??
 const apifyAPI = axios.create({
-  baseURL: "https://api.apify.com/v1/5EyWPb2cncNhD7hhm/crawlers/mJNiod6QQFmhSBLio/lastExec/results?token=iXiFD2vg3SKvnHs9NEY3bPz9M"
+  baseURL: resultsHTML.resultsHTML
 });
-
-function getRACrawl() {
-    apifyAPI
-    .get()
-    .then(response => {
-        let results=[]
+router.get("/events/addRA", (req, res, next) => {
+  res.render("addRA");
+});
+// GET DETAILS ON LAST CALLED CRAWL
+router.get("/startCrawl", (req, res, next) => {
+  console.log(`I would like to start the crawl...`, startHTML.startHTML)
+  axios.post(startHTML.startHTML)
+  .then(() =>{res.send(`Initiated, Check Status before Submitting`)})
+});
+router.get("/statusCrawl", (req, res, next) => {
+  axios.get(lastExec.lastExec).then(response => {
+    res.send(response.data[response.data.length-1])
+    // console.log(response.data)
+  })
+});
+/* MAKE SURE TO MAKE THIS AUTHORIZED AND LOGGED IN AS ADMIN */
+router.get("/events/addRAresults", (req, res, next) => {
+  axios.get(lastExec.lastExec).then(response => {
+    if(response.data[response.data.length-1].status === `SUCCEEDED`){
+      apifyAPI.get().then(response=> {
+        console.log(`getting: `, resultsHTML.resultsHTML)
+        let results = [];
         response.data.forEach(el => {
-            // console.log(el.pageFunctionResult, `el: `)
-            results.push(el.pageFunctionResult)
-        });
-      console.log(results,`done`);
-    })
-    .catch(err => {
-      console.error(err);
-    });
-}
+          if(el != 'null'){results.push(el.pageFunctionResult)};
+        })
+        // results.shift()
+        console.log(results,results.length)
+        Event.create(results, (err) =>{
+          if (err) {console.log(`there was 1 error`) }
+          console.log(`Created ${results.length} events maybe`)
+        })
+        res.redirect(`/priv/private`)
+      })
+    } else {console.log(`crawl not finished check apify run page`)}
+});
+})
 
 module.exports = router;
