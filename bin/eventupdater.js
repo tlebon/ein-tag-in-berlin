@@ -14,10 +14,3 @@ Event.updateMany(
   console.log('updated');
   mongoose.connection.close();
 });
-
-// Event.create(results, err => {
-//   if (err) {
-//     throw err;
-//   }
-//   console.log(`Created ${results.length} events`);
-// });
