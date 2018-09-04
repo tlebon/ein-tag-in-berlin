@@ -6,7 +6,8 @@ const Event = require("../models/Event");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
-router.get("/private", checkRoles("tim", "jason"), (req, res) => {
+
+router.get('/private', checkRoles('admin'), (req, res) => {
   Event.find({})
     .then(events => {
       res.render("private", { events });
