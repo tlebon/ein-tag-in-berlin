@@ -7,10 +7,10 @@
         <ul>
             {{#each events}}   
             <li>
-            <h3>{{this.name}}</h3>
-              <h4>{{this.date}}</h4>
-            <h4>{{this.time}}</h4>
-             <h4>{{this.address}}</h4>
+            <h3>Event Name:{{this.name}}</h3>
+              <h4>Date: {{this.date}}</h4>
+            <h4>Time: {{this.time}}</h4>
+             <h4>Address: {{this.address}}</h4>
              <a href="delete/{{this._id}}">
             <button class='btn-delete'>This event sucks!</button>
         </a> 
