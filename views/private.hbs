@@ -5,16 +5,19 @@
             <a href="/events/add"><button>Add an event</button></a>
         </div>
         <ul>
-            {{#each events}}   
+            {{#each events}}
             <li>
-            <h3>{{this.name}}</h3>
-              <h4>{{this.date}}</h4>
-            <h4>{{this.time}}</h4>
-             <h4>{{this.address}}</h4>
-             <a href="delete/{{this._id}}">
-            <button class='btn-delete'>This event sucks!</button>
-        </a> 
-        </li>{{/each}}
+                <h3>Event Name:  {{this.name}}</h3>
+                <h4>Date: {{this.date}}   Time: {{this.time}}</h4>
+                <h4>Venue: {{this.venue}}</h4>
+                <h4>Address: {{this.address}}</h4>
+                <a href={{this.url}}>Link to Event</a>
+                <br>
+                <br>
+                <a href="delete/{{this._id}}">
+                    <button class='btn-delete'>This event sucks!</button>
+                </a>
+            </li>{{/each}}
         </ul>
 
 

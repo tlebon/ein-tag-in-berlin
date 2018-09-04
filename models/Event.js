@@ -7,6 +7,7 @@ const eventSchema = new Schema({
     required:true},
   date: String,
   time: String,
+  venue: String,
   address: String,
   url: {
     type: String,

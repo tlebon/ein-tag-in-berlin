@@ -120,5 +120,15 @@ router.get("/events/addRAresults", (req, res, next) => {
     } else {console.log(`crawl not finished check apify run page`)}
 });
 })
+//PURGE ALL EVENTS
+router.get("/delete/all", (req, res) => {
+  // res.send(`Events Purged`);
+  Event.remove({})
+    .then(result => {
+      console.log(`Events Purged`);
+      res.redirect('/priv/private')
+    })
+    .catch(console.error);
+});
 
 module.exports = router;

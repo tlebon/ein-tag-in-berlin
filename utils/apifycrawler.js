@@ -2,13 +2,19 @@
 function pageFunction(context) {
   var $ = context.jQuery;
   if (context.request.label === "EVENT") {
-    var result = {
-      title: $("#sectionHead > h1").text(),
-      date2: $("TODO").text(),
-      date: $("#detail > ul > li:nth-child(1) > a").text(),
-      venue: $("#detail > ul > li.wide").text(),
-      venue2: $(".cat-rev").text()
-    };
+    function pageFunction(context) {
+      var $ = context.jQuery;
+      if (context.request.label === "EVENT") {
+        var result = {
+          name: $("#sectionHead > h1").text(),
+          date: $("#detail > ul > li:nth-child(1) > a").text(),
+          venue: $("#detail > ul > li.wide > a.cat-rev").html(),
+          address: $("#detail > ul > li.wide").text(),
+          url: window.location.href
+        };
+        return result;
+      }
+    }
     return result;
   }
 }
