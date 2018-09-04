@@ -1,21 +1,25 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <div class="navbar">
-<a href="/"><button>Home</button></a>
+
+<head>
+  <title>{{title}}</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <div class="navbar">
+    <a href="/"><button>Home</button></a>
     <a href="/sign-in"><button>Sign in</button></a>
     <a href="/sign-up"><button>Sign up</button></a>
-<a href="/sign-out"><button>Sign Out</button></a>
-<a href="/profile" class="btn-mid"><button>Profile</button></a>
-    </div>
+    <a href="/sign-out"><button>Sign Out</button></a>
+    <a href="/profile" class="btn-mid"><button>Profile</button></a>
+  </div>
 
-    {{{body}}}
+  {{{body}}}
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src='/javascripts/script.js'></script>
+</body>
 
-    <script src='/javascripts/script.js' />
-  </body>
 </html>

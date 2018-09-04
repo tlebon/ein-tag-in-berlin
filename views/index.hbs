@@ -1,13 +1,23 @@
 <div class="container">
-  <div class="card"><h1>{{title}}</h1>
-<h3>Wilkommen zu {{title}}</h3>
-<h4>(Welcome to A Day in Berlin)</h4>
-{{!-- <a href="/sign-in">sign in</a>
-<a href="/sign-out">sign out</a> --}}
-<a href="/priv/private">private</a> 
-<button class="random">Haben Sie einen schönen Tag</button>
-<br> {{#if error}}
-            <p> {{error}}</p>
-            {{/if}}
-</div>
+  <div class="card">
+    <h1>{{title}}</h1>
+    <h3>Wilkommen zu {{title}}</h3>
+    <h4>(Welcome to A Day in Berlin)</h4>
+    {{!-- <a href="/sign-in">sign in</a>
+    <a href="/sign-out">sign out</a> --}}
+    <a href="/priv/private">private</a>
+    <div class="redirect">
+      {{!-- <form action="/locate" method='GET'>
+        <input type="number" name="lat" class="lat" step="any">
+        <input type="number" name="lng" class="lng" step="any"> --}}
+        <button class="random" type="submit">Haben Sie einen schönen Tag</button>
+        {{!-- </form> --}}
+    </div>
+    <br> {{#if error}}
+    <p> {{error}}</p>
+    {{/if}}
+    <div class="results">
+
+    </div>
+  </div>
 </div>
