@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
 router.get('/locate/:lat/:lng', (req, res, next) => {
   console.log(req.params)
   // res.send(req.params)
-    const url = "https://api.yelp.com/v3/businesses/search?latitude=" + req.params.lat + "&longitude=" + req.params.lng + "&radius=2000"
+    const url = "https://api.yelp.com/v3/businesses/search?latitude=" + req.params.lat + "&longitude=" + req.params.lng + "&radius=2000&categories=bars&limit=3&sort_by=rating"
     axios({
       url,
       headers: {
@@ -19,8 +19,10 @@ router.get('/locate/:lat/:lng', (req, res, next) => {
       }
     })
     .then(result => {
-      res.send(result.data)
-      // res.render('index',result.data)
+      // res.send(result.data.businesses)
+      let bars = result.data.businesses
+      console.log(bars)
+      res.render('index',{bars})
       // $(".results").append(businesses[0].alias)
     })
 });
