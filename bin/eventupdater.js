@@ -1,16 +1,18 @@
-const mongoose = require('mongoose');
-const Event = require('../models/Event');
+const mongoose = require("mongoose");
+const Event = require("../models/Event");
 
-const dbName = 'ein-tag-in-berlin';
+const dbName = "ein-tag-in-berlin";
 mongoose.connect(`mongodb://localhost/${dbName}`);
-
-
 
 Event.updateMany(
   { venue: "Chalet" },
-  { venue: "Chalet2UPDATED"
+  {
+    location: {
+      lat: 25,
+      lng: 25,
+    }
   }
 ).then(() => {
-  console.log('updated');
+  console.log("updated");
   mongoose.connection.close();
 });
