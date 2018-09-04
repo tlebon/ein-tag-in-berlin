@@ -121,13 +121,12 @@ router.get("/events/addRAresults", (req, res, next) => {
 });
 })
 //PURGE ALL EVENTS
-router.post("/delete/all", (req, res) => {
+router.get("/delete/all", (req, res) => {
   // res.send(`Events Purged`);
   Event.remove({})
     .then(result => {
       console.log(`Events Purged`);
-
-      // res.redirect('/priv/private')
+      res.redirect('/priv/private')
     })
     .catch(console.error);
 });
