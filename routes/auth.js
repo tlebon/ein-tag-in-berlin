@@ -7,11 +7,13 @@ const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
 const Event = require("../models/Event");
 //ITEMS NEEDED FOR RA CRAWLER
 const axios = require("axios");
-const startHTML = require('../utils/apifycrawler')
-const resultsHTML = require('../utils/apifycrawler')
-const lastExec = require('../utils/apifycrawler')
+const startHTML = require("../utils/apifycrawler");
+const resultsHTML = require("../utils/apifycrawler");
+const lastExec = require("../utils/apifycrawler");
 
-
+//NEEDED FOR DATA MANIPULATION
+const Today = require("../utils/dateSetup");
+// import {formatDate} from '../utils/dateSetup'
 
 router.get("/sign-up", (req, res, next) => {
   res.render("sign-up");
@@ -89,46 +91,91 @@ router.get("/events/addRA", (req, res, next) => {
 });
 // GET DETAILS ON LAST CALLED CRAWL
 router.get("/startCrawl", (req, res, next) => {
-  console.log(`I would like to start the crawl...`, startHTML.startHTML)
-  axios.post(startHTML.startHTML)
-  .then(() =>{res.send(`Initiated, Check Status before Submitting`)})
+  console.log(`I would like to start the crawl...`, startHTML.startHTML);
+  axios.post(startHTML.startHTML).then(() => {
+    res.send(`Initiated, Check Status before Submitting`);
+  });
 });
 router.get("/statusCrawl", (req, res, next) => {
   axios.get(lastExec.lastExec).then(response => {
-    res.send(response.data[response.data.length-1])
+    res.send(response.data[response.data.length - 1]);
     // console.log(response.data)
-  })
+  });
 });
 /* MAKE SURE TO MAKE THIS AUTHORIZED AND LOGGED IN AS ADMIN */
 router.get("/events/addRAresults", (req, res, next) => {
   axios.get(lastExec.lastExec).then(response => {
-    if(response.data[response.data.length-1].status === `SUCCEEDED`){
-      apifyAPI.get().then(response=> {
-        console.log(`getting: `, resultsHTML.resultsHTML)
+    if (response.data[response.data.length - 1].status === `SUCCEEDED`) {
+      apifyAPI.get().then(response => {
+        console.log(`getting: `, resultsHTML.resultsHTML);
         let results = [];
         response.data.forEach(el => {
-          if(el != 'null'){results.push(el.pageFunctionResult)};
-        })
+          if (el != "null") {
+            results.push(el.pageFunctionResult);
+          }
+        });
         // results.shift()
-        console.log(results,results.length)
-        Event.create(results, (err) =>{
-          if (err) {console.log(`there was 1 error`) }
-          console.log(`Created ${results.length} events maybe`)
-        })
-        res.redirect(`/priv/private`)
-      })
-    } else {console.log(`crawl not finished check apify run page`)}
+        console.log(results, results.length);
+        Event.create(results, err => {
+          if (err) {
+            console.log(`there was 1 error`);
+          }
+          console.log(`Created ${results.length} events maybe`);
+        });
+        res.redirect(`/priv/private`);
+      });
+    } else {
+      console.log(`crawl not finished check apify run page`);
+    }
+  });
 });
-})
 //PURGE ALL EVENTS
 router.get("/delete/all", (req, res) => {
   // res.send(`Events Purged`);
   Event.remove({})
     .then(result => {
       console.log(`Events Purged`);
-      res.redirect('/priv/private')
+      res.redirect("/priv/private");
     })
     .catch(console.error);
+});
+
+// ADD GEO LOC FIELD
+router.post("/updateall", (req, res) => {
+  console.log(`updating some shit`);
+  Event.updateMany({ venue: "Chalet" }, { geoloc: 5 }).then(() => {
+    res.send(`updated`);
+  });
+});
+
+function formatDate(date) {
+  var monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return day + " " + monthNames[monthIndex] + " " + year;
+}
+router.get("/jasonsview", (req, res) => {
+  let today = formatDate(new Date());
+  console.log(today);
+  Event.find({ date: today}, 'name venue url').then(result => {
+    console.log(`Found ${result.length} events!-----`)
+    res.send(result)});
 });
 
 module.exports = router;
