@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const cors = require('cors');
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const express = require('express')
@@ -34,6 +35,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(flash())
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+
 
 app.use(
     session({
