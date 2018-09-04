@@ -13,6 +13,7 @@ const lastExec = require("../utils/apifycrawler");
 
 //NEEDED FOR DATA MANIPULATION
 const Today = require("../utils/dateSetup");
+const moment = require('moment')
 // import {formatDate} from '../utils/dateSetup'
 
 router.get("/sign-up", (req, res, next) => {
@@ -67,8 +68,8 @@ router.get("/events/add", ensureLoggedIn("/sign-in"), (req, res, next) => {
 });
 
 router.post("/events/add", ensureLoggedIn("/sign-in"), (req, res, next) => {
-  const { name, date, time, address, details } = req.body;
-  new Event({ name, date, time, address, details })
+  const { name, date, time, venue, address, url, details } = req.body;
+  new Event({ name, date, time, venue, address, url, details })
     .save()
     .then(result => {
       res.render("index", { error: "Event Created!" });

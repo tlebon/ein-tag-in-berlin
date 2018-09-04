@@ -5,9 +5,12 @@
     <h4>(Welcome to A Day in Berlin)</h4>
     {{!-- <a href="/sign-in">sign in</a>
     <a href="/sign-out">sign out</a> --}}
-    <a href="/priv/private">private</a>
+    <a href="/priv/private"><button>EVENTS LIST (formerly private)</button></a>
+    <br>
+    <br>
     <div class="redirect">
-      {{!-- <form action="/locate" method='GET'>
+      {{!--
+      <form action="/locate" method='GET'>
         <input type="number" name="lat" class="lat" step="any">
         <input type="number" name="lng" class="lng" step="any"> --}}
         <button class="random" type="submit">Haben Sie einen schönen Tag</button>
@@ -17,7 +20,6 @@
     <p> {{error}}</p>
     {{/if}}
     <div class="results">
-
     </div>
   </div>
 </div>
