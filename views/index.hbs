@@ -16,6 +16,12 @@
         <button class="random" type="submit">Haben Sie einen schönen Tag</button>
         {{!-- </form> --}}
     </div>
+    <div class="bars">
+      {{> barPartial}}
+    </div>
+     <div class="restaurants">
+      {{> restPartial}}
+    </div>
     <br> {{#if error}}
     <p> {{error}}</p>
     {{/if}}
