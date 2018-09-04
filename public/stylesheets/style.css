@@ -69,4 +69,10 @@ textarea {
 .btn-delete {
   background-color: red; }
 
+.lat {
+  opacity: 0; }
+
+.lng {
+  opacity: 0; }
+
 /*# sourceMappingURL=style.css.map */

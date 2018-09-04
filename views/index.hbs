@@ -6,7 +6,13 @@
     {{!-- <a href="/sign-in">sign in</a>
     <a href="/sign-out">sign out</a> --}}
     <a href="/priv/private">private</a>
-    <button class="random">Haben Sie einen schönen Tag</button>
+    <div class="redirect">
+      {{!-- <form action="/locate" method='GET'>
+        <input type="number" name="lat" class="lat" step="any">
+        <input type="number" name="lng" class="lng" step="any"> --}}
+        <button class="random" type="submit">Haben Sie einen schönen Tag</button>
+        {{!-- </form> --}}
+    </div>
     <br> {{#if error}}
     <p> {{error}}</p>
     {{/if}}
