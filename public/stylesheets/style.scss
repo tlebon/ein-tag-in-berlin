@@ -100,11 +100,11 @@ textarea {
 // }
 
 .lat{
-    opacity: 0;
+    // opacity: 0;
 }
 
 .lng{
-    opacity: 0;
+    // opacity: 0;
 }
 
 .row{
@@ -114,4 +114,12 @@ textarea {
 
 .hidden{
     display:none;
+}
+#map {
+    height: 500px;
+    width: 100%;
+   }
+.min{
+       visibility: hidden;
+       size:1 px;
 }
