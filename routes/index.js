@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios')
+const Event = require('../models/Event')
 
 
 /* GET home page */
@@ -8,11 +9,36 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
+function formatDate(date) {
+  var monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return day + " " + monthNames[monthIndex] + " " + year;
+}
+
 router.get('/locate/:lat/:lng', (req, res, next) => {
   // res.send(req.params)
+  let today = formatDate(new Date());
   let bars ="";
-  const bloop = ("https://api.yelp.com/v3/businesses/search?latitude=" + req.params.lat + "&longitude=" + req.params.lng + "&radius=2000&categories=restaurants&limit=3&sort_by=rating");
-  const url = ("https://api.yelp.com/v3/businesses/search?latitude=" + req.params.lat + "&longitude=" + req.params.lng + "&radius=2000&categories=bars&limit=3&sort_by=rating")
+  let restaurants='';
+  const bloop = ("https://api.yelp.com/v3/businesses/search?latitude=" + req.params.lat + "&longitude=" + req.params.lng + "&radius=2000&categories=restaurants&limit=3&sort_by=rating&open_now=true");
+  const url = ("https://api.yelp.com/v3/businesses/search?latitude=" + req.params.lat + "&longitude=" + req.params.lng + "&radius=2000&categories=bars&limit=3&sort_by=rating&open_now=true")
   // console.log(url)
   axios(
     url,{
@@ -35,14 +61,20 @@ router.get('/locate/:lat/:lng', (req, res, next) => {
       })
     
     })
-      
     .then(result => {
       // res.send(result.data.businesses)
-      let restaurants = result.data.businesses
+       restaurants = result.data.businesses
       // console.log(restaurants)
-      res.render('index',{bars, restaurants })
       // $(".results").append(businesses[0].alias)
+          res.render('index',{bars, restaurants })
     })
+    //  return Event.find({ date: today}, 'name venue url')
+    //   // console.log(today);
+    //   .then(results=> {
+    //     console.log(`Found ${results.length} events!-----`)
+    //     // res.send(result)});
+    // })
+
     .catch(err => {
       console.log(err)
     })

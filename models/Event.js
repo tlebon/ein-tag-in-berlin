@@ -5,8 +5,11 @@ const eventSchema = new Schema({
   name: {
     type:String,
     required:true},
+    image_url:{
+      type:String,
+      default:'http://www.iheartberlin.de/wp-content/uploads/2016/05/Berlin-Club-Etiquette.jpg'},
   date: String,
-  time: String,
+  // time: String,
   venue: String,
   address: String,
   url: {
