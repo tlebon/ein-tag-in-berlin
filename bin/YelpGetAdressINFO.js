@@ -4,7 +4,7 @@ const Venue = require("../models/Venue");
 const axios = require("axios");
 
 const dbName = "ein-tag-in-berlin";
-mongoose.connect(`mongodb://localhost/${dbName}`);
+mongoose.connect(process.env.MONGODB_URI);
 
 let venuesArr = [
   { geoloc: 4, venue: "://about blank" },

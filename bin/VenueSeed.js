@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Venue = require('../models/Venue');
 
 const dbName = 'ein-tag-in-berlin';
-mongoose.connect(`mongodb://localhost/${dbName}`);
+mongoose.connect(process.env.MONGODB_URI);
 
 const results = [ { _id: '5b8fb977ad318557257ab252',
   venue: '://about blank',

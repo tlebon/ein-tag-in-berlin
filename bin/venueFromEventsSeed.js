@@ -4,7 +4,7 @@ const Venue = require("../models/Venue");
 const axios = require("axios");
 
 const dbName = "ein-tag-in-berlin";
-mongoose.connect(`mongodb://localhost/${dbName}`);
+mongoose.connect(process.env.MONGODB_URI);
 
 // BUILD A LIST OF VENUES IN THE EVENT LIST
 let venuesArr = [];

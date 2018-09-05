@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Event = require("../models/Event");
 
 const dbName = "ein-tag-in-berlin";
-mongoose.connect(`mongodb://localhost/${dbName}`);
+mongoose.connect(process.env.MONGODB_URI);
 
 Event.updateMany(
   { venue: /Berghain/i },
