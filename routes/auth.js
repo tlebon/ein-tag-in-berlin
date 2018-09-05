@@ -21,11 +21,11 @@ router.get("/sign-up", (req, res, next) => {
 });
 
 router.post("/sign-up", (req, res, next) => {
-  const { username, password, role } = req.body;
+  const { username, password, role, image } = req.body;
 
   const encrypted = bcrypt.hashSync(password, 10);
 
-  new User({ username, password: encrypted, role })
+  new User({ username, password: encrypted, role, image })
     .save()
     .then(result => {
       res.render("index", { error: "User account was created" });
