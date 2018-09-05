@@ -12,7 +12,7 @@ const eventSchema = new Schema({
   // time: String,
   venue: String,
   address: String,
-  url: {
+  eventUrl: {
     type: String,
     unique: true
   },
