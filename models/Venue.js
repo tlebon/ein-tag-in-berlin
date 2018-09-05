@@ -6,6 +6,8 @@ const venueSchema = new Schema({
       type: String,
       unique: true},
   address: String,
+  addressFull: Object,
+  yelpID: String,
   url: {
     type: String,
     unique: true
