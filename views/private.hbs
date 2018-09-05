@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="card">
+        <div class="list-flex">
+            <h1>Current Events</h1>
+            <a href="/events/add"><button>Add an event</button></a>
+        </div>
+        <ul>
+            {{#each events}}
+            <li>
+                <h3>Event Name:  {{this.name}}</h3>
+                <h4>Date: {{this.date}}   Time: {{this.time}}</h4>
+                <h4>Venue: {{this.venue}}</h4>
+                <h4>Address: {{this.address}}</h4>
+                <a href={{this.url}}>Link to Event</a>
+                <br>
+                <img src="{{this.image_url}}" alt="Event pic" width="100">
+                <br>
+                <a href="delete/{{this._id}}">
+                    <button class='btn-delete'>This event sucks!</button>
+                </a>
+            </li>{{/each}}
+        </ul>
+
+
+
+    </div>
+</div>
