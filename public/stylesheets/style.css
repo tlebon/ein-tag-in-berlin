@@ -77,14 +77,19 @@ textarea {
 .btn-delete {
   background-color: red; }
 
-.lat {
-  opacity: 0; }
-
-.lng {
-  opacity: 0; }
-
 .row {
   display: flex;
   flex-direction: row; }
+
+.hidden {
+  display: none; }
+
+#map {
+  height: 500px;
+  width: 100%; }
+
+.min {
+  visibility: hidden;
+  size: 1 px; }
 
 /*# sourceMappingURL=style.css.map */

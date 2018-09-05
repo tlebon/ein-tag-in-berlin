@@ -37,8 +37,8 @@ router.get('/locate/:lat/:lng', (req, res, next) => {
   let today = formatDate(new Date());
   let bars = "";
   let restaurants = '';
-  const bloop = ("https://api.yelp.com/v3/businesses/search?latitude=" + req.params.lat + "&longitude=" + req.params.lng + "&radius=2000&categories=restaurants&limit=3&sort_by=rating&open_now=true");
-  const url = ("https://api.yelp.com/v3/businesses/search?latitude=" + req.params.lat + "&longitude=" + req.params.lng + "&radius=2000&categories=divebars,absinthebars,beachbars,beerbar,cocktailbars,lounges,pubs,whiskeybars,wine_bars,sportsbars,speakeasies&limit=3&sort_by=rating&open_now=true")
+  const bloop = ("https://api.yelp.com/v3/businesses/search?latitude=" + req.params.lat + "&longitude=" + req.params.lng + "&radius=1500&categories=restaurants&limit=3&sort_by=rating&open_now=true");
+  const url = ("https://api.yelp.com/v3/businesses/search?latitude=" + req.params.lat + "&longitude=" + req.params.lng + "&radius=1500&categories=divebars,absinthebars,beachbars,beerbar,cocktailbars,lounges,pubs,whiskeybars,wine_bars,sportsbars,speakeasies&limit=3&sort_by=rating&open_now=true")
   // console.log(url)
   axios(
     url, {
@@ -65,11 +65,11 @@ router.get('/locate/:lat/:lng', (req, res, next) => {
           restaurants = result.data.businesses
           // console.log(restaurants)
 
-          return Event.find({ date: today }, 'name venue', { limit: 3 })
+          return Event.find({ date: today }, 'name venue image_url url', { limit: 3 })
         })
         .then(events => {
-          console.log("restaurants"+ restaurants)
-          res.render('index', { bars, restaurants, events })
+          console.log("restaurants")
+          res.render('results', { bars, restaurants, events })
           console.log(`Found ${events.length} events!-----`)
           // res.send(result)});
         })
