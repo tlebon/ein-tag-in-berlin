@@ -10,7 +10,11 @@ const userSchema = new Schema({
     role: {
       type: String,
       enum : ['user', 'admin'],
-      default : 'user'}
+      default : 'user'},
+    image: {
+      type: String,
+      default: `https://secure.meetupstatic.com/photos/member/8/3/d/a/highres_252873754.jpeg`
+    }
 })
 
 module.exports = mongoose.model('User', userSchema)
