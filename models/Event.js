@@ -15,10 +15,11 @@ const eventSchema = new Schema({
     unique: true
   },
   location: {
-    lat: Number,
-    lng: Number
+    latitude: Number,
+    longitude: Number
   },
   geoloc: Number,
+  eventimg: String,
   details: String
 });
 
