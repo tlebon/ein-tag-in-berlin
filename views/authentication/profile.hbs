@@ -1,8 +1,8 @@
 
 <h1>hey welcome to your profile, {{user.username}}</h1>
 <h2>User Role: {{user.role}}</h2>
-<h2>this is totally your profile picture </h2>
-<img src="{{user.image}}" alt="whoops i hope you cant see me" width="400px">
+{{!-- <h2>this is totally your profile picture !</h2> --}}
+<img src="{{user.image}}" alt="USER IMAGE URL SHOULD BE AN IMAGE" width="400px">
 
 <a href='/events/add'><button class="event">Add an Event!</button></a>
 {{!-- ADMIN BUTTON SHOULD ONLY APPEAR FOR ADMINS --}}
