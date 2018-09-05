@@ -183,7 +183,7 @@ function formatDate(date) {
 router.get("/jasonsview", (req, res) => {
   let today = formatDate(new Date());
   console.log(today);
-  Event.find({ date: today }, "name venue geoloc", {limit: 3}).then(result => {
+  Event.find({ date: today }, null, {limit: 10}).then(result => {
     console.log(`Found ${result.length} events!-----`);
     res.send(result);
   });
