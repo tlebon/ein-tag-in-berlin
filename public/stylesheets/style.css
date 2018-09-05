@@ -87,4 +87,7 @@ textarea {
   display: flex;
   flex-direction: row; }
 
+.hidden {
+  display: none; }
+
 /*# sourceMappingURL=style.css.map */

@@ -26,5 +26,13 @@ $(document).ready(() => {
       console.log('Browser does not support geolocation.');
     }
   }
+$('.restaurants>.row>.cards').click(function(){
+  console.log("!!!clicked!!!")
+$(".bars").removeClass('hidden')
+})
+$('.bars>.row>.cards').click(function(){
+  console.log("!!!clicked!!!")
+$(".events").removeClass('hidden')
+})
 
 });
