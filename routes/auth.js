@@ -12,6 +12,7 @@ const resultsHTML = require("../utils/apifycrawler");
 const lastExec = require("../utils/apifycrawler");
 
 //NEEDED FOR DATA MANIPULATION
+// const checkRoles = require("./priv")
 const Today = require("../utils/dateSetup");
 const moment = require("moment");
 // import {formatDate} from '../utils/dateSetup'
@@ -87,11 +88,11 @@ router.post("/events/add", ensureLoggedIn("/sign-in"), (req, res, next) => {
 const apifyAPI = axios.create({
   baseURL: resultsHTML.resultsHTML
 });
-router.get("/events/addRA", (req, res, next) => {
+router.get("/events/addRA", checkRoles('admin'),(req, res, next) => {
   res.render("addRA");
 });
 // GET DETAILS ON LAST CALLED CRAWL
-router.get("/startCrawl", (req, res, next) => {
+router.get("/startCrawl", checkRoles('admin'),(req, res, next) => {
   console.log(`I would like to start the crawl...`, startHTML.startHTML);
   axios.post(startHTML.startHTML).then(() => {
     res.send(`Initiated, Check Status before Submitting`);
@@ -104,7 +105,7 @@ router.get("/statusCrawl", (req, res, next) => {
   });
 });
 /* MAKE SURE TO MAKE THIS AUTHORIZED AND LOGGED IN AS ADMIN */
-router.get("/events/addRAresults", (req, res, next) => {
+router.get("/events/addRAresults", checkRoles('admin'),(req, res, next) => {
   axios.get(lastExec.lastExec).then(response => {
     if (response.data[response.data.length - 1].status === `SUCCEEDED`) {
       apifyAPI.get().then(response => {
@@ -131,7 +132,7 @@ router.get("/events/addRAresults", (req, res, next) => {
   });
 });
 //PURGE ALL EVENTS
-router.get("/delete/all", (req, res) => {
+router.get("/delete/all", checkRoles('admin'), (req, res) => {
   // res.send(`Events Purged`);
   Event.remove({})
     .then(result => {
@@ -142,7 +143,7 @@ router.get("/delete/all", (req, res) => {
 });
 
 // ADD GEO LOC FIELD
-router.get("/updateall", (req, res) => {
+router.get("/updateall", checkRoles('admin'), (req, res) => {
   console.log(`updating some shit`);
   Event.updateMany(
     { venue: "Chalet" },
@@ -183,10 +184,20 @@ function formatDate(date) {
 router.get("/jasonsview", (req, res) => {
   let today = formatDate(new Date());
   console.log(today);
-  Event.find({ date: today }, "name venue geoloc").then(result => {
+  Event.find({ date: today }, null, {limit: 10}).then(result => {
     console.log(`Found ${result.length} events!-----`);
     res.send(result);
   });
 });
+
+function checkRoles(role) {
+  return function(req, res, next) {
+    if (req.isAuthenticated() && req.user.role === role) {
+      return next();
+    } else {
+      res.redirect("/sign-in");
+    }
+  };
+}
 
 module.exports = router;

@@ -12,15 +12,16 @@ const eventSchema = new Schema({
   // time: String,
   venue: String,
   address: String,
-  url: {
+  eventUrl: {
     type: String,
     unique: true
   },
   location: {
-    lat: Number,
-    lng: Number
+    latitude: Number,
+    longitude: Number
   },
   geoloc: Number,
+  eventimg: String,
   details: String
 });
 

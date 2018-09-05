@@ -9,11 +9,11 @@ const userSchema = new Schema({
     password: String,
     role: {
       type: String,
-      enum : ['user', 'admin'],
-      default : 'user'},
+      // enum : ['user', 'admin'],
+      default : "user"},
     image: {
       type: String,
-      default: `https://secure.meetupstatic.com/photos/member/8/3/d/a/highres_252873754.jpeg`
+      default: "https://secure.meetupstatic.com/photos/member/8/3/d/a/highres_252873754.jpeg"
     }
 })
 
