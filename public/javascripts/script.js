@@ -118,19 +118,62 @@ $(document).ready(() => {
     // addMarkerC(loc, mapc);
     $(".events").addClass("hidden");
     $(".event-btn").removeClass("hidden");
+    $("#floating-panel").removeClass("hidden");
+   console.log( markerCollection[3].lng,markerCollection[3].lat)
+    initMap();
     // addMarker(loc, map);
   });
-  $(".events-btn").click(function () {
+  $(".event-btn").click(function () {
     $(".events").removeClass("hidden");
   })
+  
+  function initMap() {
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    var directionsService = new google.maps.DirectionsService;
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 12,
+      center: {lat: markerCollection[0].lat, lng: markerCollection[0].lng}
+    });
+    directionsDisplay.setMap(map);
 
+    calculateAndDisplayRoute(directionsService, directionsDisplay);
+    document.getElementById('mode').addEventListener('change', function() {
+      calculateAndDisplayRoute(directionsService, directionsDisplay);
+    });
+  }
+
+  function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    var selectedMode = document.getElementById('mode').value;
+    directionsService.route({
+      origin: {lat: markerCollection[0].lat, lng: markerCollection[0].lng},  // Haight.
+      destination: {lat: parseFloat(markerCollection[3].lat), lng: parseFloat(markerCollection[3].lng)},  // Ocean Beach.
+      waypoints: [
+        {
+          location: {lat: parseFloat(markerCollection[1].lat), lng: parseFloat(markerCollection[1].lng)},
+          stopover: true
+        },{
+          location: {lat: parseFloat(markerCollection[2].lat), lng: parseFloat(markerCollection[2].lng)},
+          stopover: true
+        }],
+      // Note that Javascript allows us to access the constant
+      // using square brackets and a string value as its
+      // "property."
+      travelMode: google.maps.TravelMode[selectedMode]
+    }, function(response, status) {
+      if (status == 'OK') {
+        directionsDisplay.setDirections(response);
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
+  }
 
   function startMap(lat, lng) {
     const ironhackBER = { lat: 52.5053175, lng: 13.3727438 };
 
     // Map initialization
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 13,
+      zoom: 12,
       center: ironhackBER
     });
 
