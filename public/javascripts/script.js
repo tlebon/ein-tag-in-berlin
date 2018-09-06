@@ -106,13 +106,17 @@ $(document).ready(() => {
           // Add a marker for your user location
           for(let i =0 ; i<markerCollection.length; i++){
             console.log(markerCollection[i])
+            //SETUP FLAG
+            var pinImage =new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+            new google.maps.Size(21, 34),
             new google.maps.Marker({
               position: {
                 lat: Number(markerCollection[i].lat),
                 lng: Number(markerCollection[i].lng)
               },
               map: map,
-              title: "You are here"
+              // label: markerCollection[i].title,
+              icon: pinImage
             });
           }
         },
