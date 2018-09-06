@@ -107,7 +107,6 @@ $(document).ready(() => {
           for(let i =0 ; i<markerCollection.length; i++){
             console.log(markerCollection[i])
             //SETUP FLAG
-            var pinImage =new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
             new google.maps.Size(21, 34),
             new google.maps.Marker({
               position: {
@@ -115,9 +114,10 @@ $(document).ready(() => {
                 lng: Number(markerCollection[i].lng)
               },
               map: map,
+ /* SET LABELS AND OR CUSTOM ICONS*/
               // label: markerCollection[i].title,
-              icon: pinImage
-            });
+              // icon: 
+            })
           }
         },
         function() {
