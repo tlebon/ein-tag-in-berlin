@@ -65,7 +65,7 @@ router.get('/locate/:lat/:lng', (req, res, next) => {
           restaurants = result.data.businesses
           // console.log(restaurants)
 
-          return Event.find({ date: today }, 'name venue image_url url', { limit: 3 })
+          return Event.find({ date: today }, 'name venue image_url url location.latitude location.longitude', { limit: 3 })
         })
         .then(events => {
           console.log("restaurants")

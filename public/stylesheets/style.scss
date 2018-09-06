@@ -99,13 +99,6 @@ textarea {
 //     background-color:#87A542;
 // }
 
-.lat{
-    // opacity: 0;
-}
-
-.lng{
-    // opacity: 0;
-}
 
 .row{
     display:flex;
@@ -118,6 +111,7 @@ textarea {
 #map {
     height: 500px;
     width: 100%;
+    border-radius: 25px;
    }
 .min{
        visibility: hidden;
