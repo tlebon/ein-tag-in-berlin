@@ -150,6 +150,8 @@ $(document).ready(() => {
           // Add a marker for your user location
           for (let i = 0; i < markerCollection.length; i++) {
             console.log(markerCollection[i])
+            //SETUP FLAG
+            new google.maps.Size(21, 34),
             new google.maps.Marker({
               position: {
                 lat: Number(markerCollection[i].lat),
