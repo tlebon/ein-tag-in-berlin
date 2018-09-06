@@ -1,5 +1,7 @@
+let markerCollection = [];
+
 $(document).ready(() => {
-  console.log("ready")
+  console.log("ready beep");
 
   getResults();
 
@@ -8,116 +10,150 @@ $(document).ready(() => {
   // })
   function getResults() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-
-        const center = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        console.log('center: ', center)
-        $(".redirect").html('<a href="locate/' + center.lat + '/' + center.lng + '"><button class="random">Haben Sie einen schönen Tag</button></a>')
-        // $(".lat").val(center.lat)
-        // $(".lng").val(center.lng)
-        console.log("inserted link")
-      }, function () {
-        console.log('Error in the geolocation service.');
-      });
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          let title = `YOU`;
+          markerCollection.push({ title: title, lat: position.coords.latitude, lng: position.coords.longitude });
+          const center = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          console.log("center: ", center);
+          $(".redirect").html(
+            '<a href="locate/' +
+            center.lat +
+            "/" +
+            center.lng +
+            '"><button class="random">Haben Sie einen schönen Tag</button></a>'
+          );
+          // $(".lat").val(center.lat)
+          // $(".lng").val(center.lng)
+          console.log("inserted link");
+        },
+        function() {
+          console.log("Error in the geolocation service.");
+        }
+      );
     } else {
-      console.log('Browser does not support geolocation.');
+      console.log("Browser does not support geolocation.");
     }
+    // let lat = position.coords.latitude
+    // let lng = position.coords.longitude
+    // startMap(lat, lng);
   }
 
-
-
-  $('.restaurants>.row>.cards').click(function () {
-    console.log(this.cardtext)
-    console.log($(".card-text.lng").html())
+  $(".restaurants>.row>.cards").click(function() {
+    console.log(this.cardtext);
+    console.log($(".card-text.lng").html());
     // $(this)
-    $(".bars").removeClass('hidden')
-    $("#map").removeClass('hidden')
-    let lat = $(".lat",this).html();
-    let lng = $(".lng",this).html();
+    $(".bars").removeClass("hidden");
+    $("#map").removeClass("hidden");
+    let lat = $(".lat", this).html();
+    let lng = $(".lng", this).html();
     let loc = new google.maps.LatLng(lat, lng);
-    startMap(lat, lng)
-    addMarker(loc, map)
-  })
+    let title = `SPOT`;
+    markerCollection.push({ title: title, lat: lat, lng: lng });
+    startMap(lat, lng);
+    // addMarker(loc, map);
+  });
 
-
-  $('.bars>.row>.cards').click(function () {
-    console.log("!!!clicked!!!")
-    $(".events").removeClass('hidden')
-    let lat = $(".lat",this).html();
-    let lng = $(".lng",this).html();
+  $(".bars>.row>.cards").click(function() {
+    console.log("!!!clicked!!!");
+    $(".events").removeClass("hidden");
+    let lat = $(".lat", this).html();
+    let lng = $(".lng", this).html();
     let loc = new google.maps.LatLng(lat, lng);
-    startMap(lat, lng)
-    addMarkerB(loc, map)
-  })
+    let title = `SPOT2`;
+    markerCollection.push({ title: title, lat: lat, lng: lng });
+    startMap(lat, lng);
+    // addMarkerB(loc, map);
+    markerCollection.push(lat);
+  });
+
+  $(".events>.row>.cards").click(function() {
+    console.log("!!!clicked!!!");
+    $(".events").removeClass("hidden");
+    $("#mapc").removeClass("hidden");
+    let lat = $(".lat", this).html();
+    let lng = $(".lng", this).html();
+    let loc = new google.maps.LatLng(lat, lng);
+    startMap(lat, lng);
+    // addMarkerC(loc, mapc);
+  });
 
   function startMap(lat, lng) {
-
     const ironhackBER = { lat: 52.5053175, lng: 13.3727438 };
 
     // Map initialization
-    const map = new google.maps.Map(document.getElementById('map'), {
+    const map = new google.maps.Map(document.getElementById("map"), {
       zoom: 14,
       center: ironhackBER
     });
 
-
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        const user_location = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          const user_location = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
 
-        // Center map with user location
-        map.setCenter(user_location);
+          // Center map with user location
+          map.setCenter(user_location);
 
-        // console.log('lat:', lat)
+          // console.log('lat:', lat)
 
-        // Add a marker for your user location
-        const ironHackBERMarker = new google.maps.Marker({
-          position: {
-            lat: Number(lat),
-            lng: Number(lng)
-          },
-          map: map,
-          title: "You are here"
-        });
-
-      }, function () {
-        console.log('Error in the geolocation service.');
-      });
+          // Add a marker for your user location
+          for(let i =0 ; i<markerCollection.length; i++){
+            console.log(markerCollection[i])
+            //SETUP FLAG
+            new google.maps.Size(21, 34),
+            new google.maps.Marker({
+              position: {
+                lat: Number(markerCollection[i].lat),
+                lng: Number(markerCollection[i].lng)
+              },
+              map: map,
+ /* SET LABELS AND OR CUSTOM ICONS*/
+              // label: markerCollection[i].title,
+              // icon: 
+            })
+          }
+        },
+        function() {
+          console.log("Error in the geolocation service.");
+        }
+      );
     } else {
-      console.log('Browser does not support geolocation.');
+      console.log("Browser does not support geolocation.");
     }
+    ironHackBERMarker
   }
 
-  startMap();
+  // startMap();
 
   function addMarker(loc, map) {
-    console.log("loc", loc)
+    console.log("loc", loc);
     let marker = new google.maps.Marker({
       position: loc,
-      setMap: map,
+      setMap: map
     });
     // marker.setMap(map);
   }
   function addMarkerB(loc, map) {
-    console.log("loc", loc)
+    console.log("loc", loc);
     let marker = new google.maps.Marker({
       position: loc,
-      setMap: map,
+      setMap: map
     });
     // marker.setMap(map);
   }
 
   function addMarkerC(loc, map) {
-    console.log("loc", loc)
+    console.log("loc", loc);
     let marker = new google.maps.Marker({
       position: loc,
-      setMap: map,
+      setMap: map
     });
     // marker.setMap(map);
   }

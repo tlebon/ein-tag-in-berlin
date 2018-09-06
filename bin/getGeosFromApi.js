@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const mongoose = require("mongoose");
 const Event = require("../models/Event");
 const axios = require("axios");
