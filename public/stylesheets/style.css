@@ -2,6 +2,15 @@
 * {
   box-sizing: border-box; }
 
+h3 {
+  margin: 3px; }
+
+h6, h7 {
+  margin: 2px; }
+
+img {
+  border-radius: 10px; }
+
 body {
   margin: 0;
   font: 16px 'Montserrat', Helvetica, Arial, sans-serif;
@@ -11,19 +20,26 @@ body {
 .container {
   padding: 25px calc((100% - 960px) / 2); }
 
+#mode {
+  border-radius: 15px; }
+
 .card {
   padding: 10px;
   margin: 10px;
   background-color: #fff;
-  border-radius: 25px;
+  border-radius: 15px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15); }
 
 .cards {
   padding: 10px;
   margin: 10px;
   background-color: wheat;
-  border-radius: 25px;
+  border-radius: 15px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15); }
+
+.card-title {
+  border-bottom: 1px solid black;
+  font: helvetica; }
 
 a {
   color: RGB(49, 186, 141);
@@ -38,14 +54,15 @@ button {
   outline: none;
   background-color: RGB(49, 186, 141);
   color: #fff;
-  border-radius: 25px;
+  border-radius: 15px;
   padding: 10px 15px;
   border: none;
   cursor: pointer;
   min-width: 100px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
   transition: 200ms all ease-in-out;
-  transform-origin: 50% 50%; }
+  transform-origin: 50% 50%;
+  margin-bottom: 5px; }
   button:hover {
     transform: scale(1.1);
     box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.15); }
@@ -75,7 +92,8 @@ textarea {
   margin-top: 50px; }
 
 .btn-delete {
-  background-color: red; }
+  background-color: red;
+  margin-left: 65px; }
 
 .row {
   display: flex;
@@ -87,7 +105,8 @@ textarea {
 #map {
   height: 500px;
   width: 100%;
-  border-radius: 25px; }
+  border-radius: 15px;
+  margin-bottom: 5px; }
 
 .min {
   visibility: hidden;
@@ -105,6 +124,6 @@ textarea {
   font-family: 'Roboto','sans-serif';
   line-height: 30px;
   padding-left: 10px;
-  border-radius: 25px; }
+  border-radius: 15px; }
 
 /*# sourceMappingURL=style.css.map */

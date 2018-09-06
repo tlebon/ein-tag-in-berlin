@@ -1,4 +1,7 @@
 let markerCollection = [];
+let rest;
+let bar;
+let eventchoice;
 
 $(document).ready(() => {
   console.log("Interested in our Code? Find us on Linked in Jason and/or Tim");
@@ -52,8 +55,11 @@ $(document).ready(() => {
     $("#map").removeClass("hidden");
     let lat = $(".lat", this).html();
     let lng = $(".lng", this).html();
+
     let loc = new google.maps.LatLng(lat, lng);
     let title = `SPOT`;
+    console.log(this)
+    rest=this
     // if (markerCollection.length >= 3) {
     //  let pos = markerCollection.map(function (e) { return e.title; }).lastIndexOf('SPOT');
     //   markerCollection.pop(pos)
@@ -84,6 +90,9 @@ $(document).ready(() => {
     let lng = $(".lng", this).html();
     let loc = new google.maps.LatLng(lat, lng);
     let title = `SPOT2`;
+    console.log(this)
+    bar=this
+
     // markerCollection.pop(2)
     if (markerCollection.length >= 3) {
      let pos = markerCollection.map(function (e) { return e.title; }).lastIndexOf('SPOT2');
@@ -109,6 +118,7 @@ $(document).ready(() => {
     let lng = $(".lng", this).html();
     let loc = new google.maps.LatLng(lat, lng);
     let title = `SPOT3`
+    eventchoice = this
     if (markerCollection.length >= 4) {
       let pos = markerCollection.map(function (e) { return e.title; }).lastIndexOf('SPOT3');
        markerCollection.pop(pos)
@@ -122,6 +132,11 @@ $(document).ready(() => {
    console.log( markerCollection[3].lng,markerCollection[3].lat)
     initMap();
     // addMarker(loc, map);
+    // $('.container').append
+    $('.card').append(`<div class="row choices"></div>`)
+    $('.choices').append(bar)
+    $('.choices').append(rest)
+    $('.choices').append(eventchoice)
   });
   $(".event-btn").click(function () {
     $(".events").removeClass("hidden");

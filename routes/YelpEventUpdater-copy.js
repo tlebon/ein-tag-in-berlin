@@ -1,5 +1,5 @@
 require("dotenv").config();
-const yelp_key = "Bearer _qAdbCs6bFfmv-yAFllNXRJtKeO3MZUvjA274v_Fiof_FiKg4Uchv6JpNbTi3EUWi_wOgMIDIX62gASOOYDmhODB4CdwKrKhtJCrj2QcOkV-q7f1Zgg-B7-FyFqNW3Yx" 
+// const yelp_key = "Bearer _qAdbCs6bFfmv-yAFllNXRJtKeO3MZUvjA274v_Fiof_FiKg4Uchv6JpNbTi3EUWi_wOgMIDIX62gASOOYDmhODB4CdwKrKhtJCrj2QcOkV-q7f1Zgg-B7-FyFqNW3Yx" 
 const mongoose = require("mongoose");
 const Event = require("../models/Event");
 const Venue = require("../models/Venue");
@@ -71,7 +71,7 @@ const getLoc = event => {
         {
           headers: {
             Authorization:
-            yelp_key
+            process.env.MONGODB_URI.yelp_key
           }
         }
       )
