@@ -1,8 +1,13 @@
+require('dotenv').config();
+
 const mongoose = require("mongoose");
 const Event = require("../models/Event");
+console.log(process.env.MONGODB_URI)
+
 
 const dbName = "ein-tag-in-berlin";
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(`mongodb://localhost/ein-tag-in-berlin`);
+// mongodb://localhost/ein-tag-in-berlin
 
 Event.updateMany(
   { venue: /Berghain/i },
