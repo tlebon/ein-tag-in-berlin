@@ -1,6 +1,15 @@
 <div class="container">
   <div class="card">
     <div class="loading">LOADING...</div>
+    <div id="floating-panel" class="hidden">
+    <b>Mode of Travel: </b>
+    <select id="mode" >
+      <option value="DRIVING">Driving</option>
+      <option value="WALKING">Walking</option>
+      <option value="BICYCLING">Bicycling</option>
+      {{!-- <option value="TRANSIT">Transit</option>   only works for 2 points!--}} 
+    </select>
+    </div>
     <div id="map" class="hidden"></div>
     <div class="restaurants hidden">
     CHOOSE A LOCAL RESTAURANT
