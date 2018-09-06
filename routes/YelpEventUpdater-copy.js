@@ -113,3 +113,4 @@ function updater(event, title) {
 }
 
 // yelpIt();
+module.exports = yelpIt
