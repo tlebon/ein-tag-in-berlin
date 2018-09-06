@@ -6,7 +6,7 @@ const Venue = require("../models/Venue");
 const axios = require("axios");
 
 const dbName = "ein-tag-in-berlin";
-mongoose.connect(process.env.MONGODB_URI);
+// mongoose.connect(process.env.MONGODB_URI);
 console.log(
   `YELPEventUpdater.js launched: Event venues will be checked with YELP API and assigned coordinates!`
 );
@@ -43,7 +43,7 @@ const yelpIt = async () => {
     }
   }
   console.log(`Rejected venues: `, rejections.length, rejections);
-  process.exit(0);
+  // process.exit(0);
 };
 
 // GET ALL EVENTS THAT ARE NOT YET ASSIGNED LOCATIONS *** AN ASYNC FUNCTION ****
