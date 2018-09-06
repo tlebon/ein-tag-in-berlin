@@ -184,7 +184,7 @@ function formatDate(date) {
 router.get("/jasonsview", (req, res) => {
   let today = formatDate(new Date());
   console.log(today);
-  Event.find({ date: today }, null, {limit: 10}).then(result => {
+  Event.find({ date: today,  yelpd:true }, null, {limit: 10}).then(result => {
     console.log(`Found ${result.length} events!-----`);
     res.send(result);
   });
@@ -199,5 +199,13 @@ function checkRoles(role) {
     }
   };
 }
+
+// require('../utils/YelpEventUpdater-copy')
+
+// router.get("/getcoords", (req, res) => {
+//   res.yelpIt()
+//   console.log(`yelpIt activated`)
+// });
+
 
 module.exports = router;

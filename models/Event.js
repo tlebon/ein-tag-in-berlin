@@ -16,13 +16,20 @@ const eventSchema = new Schema({
     type: String,
     unique: true
   },
-  location: {
+  coordinates: {
     latitude: Number,
     longitude: Number
   },
+  venuenameadjusted: {
+    type: Boolean,
+    default: false},
+  yelpd: {
+    type: Boolean,
+    default: false},
   geoloc: Number,
   eventimg: String,
-  details: String
+  details: String,
+  yelpID: String,
 });
 
 module.exports = mongoose.model("Event", eventSchema);
