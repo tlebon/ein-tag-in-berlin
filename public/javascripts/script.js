@@ -1,3 +1,5 @@
+let markerCollection = ['some array']
+
 $(document).ready(() => {
   console.log("ready")
 
@@ -38,6 +40,7 @@ $(document).ready(() => {
     let lat = $(".lat",this).html();
     let lng = $(".lng",this).html();
     let loc = new google.maps.LatLng(lat, lng);
+    markerCollection.push(lat)
     startMap(lat, lng)
     addMarker(loc, map)
   })
@@ -51,6 +54,7 @@ $(document).ready(() => {
     let loc = new google.maps.LatLng(lat, lng);
     startMap(lat, lng)
     addMarkerB(loc, map)
+    markerCollection.push(lat)
   })
 
   function startMap(lat, lng) {
