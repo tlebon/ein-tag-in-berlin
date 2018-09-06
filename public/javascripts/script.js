@@ -11,13 +11,15 @@ $(document).ready(() => {
   function getResults() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        function(position) {
+        function (position) {
           let title = `YOU`;
-          markerCollection.push({ title: title, lat: position.coords.latitude, lng: position.coords.longitude });
+          markerCollection.push({ title: title, lat: position.coords.latitude, lng: position.coords.longitude, icon: "http://maps.google.com/mapfiles/ms/micons/man.png", });
           const center = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           };
+          $(".restaurants").removeClass("hidden");
+          $(".loading").html("");
           console.log("center: ", center);
           $(".redirect").html(
             '<a href="locate/' +
@@ -30,7 +32,7 @@ $(document).ready(() => {
           // $(".lng").val(center.lng)
           console.log("inserted link");
         },
-        function() {
+        function () {
           console.log("Error in the geolocation service.");
         }
       );
@@ -42,7 +44,7 @@ $(document).ready(() => {
     // startMap(lat, lng);
   }
 
-  $(".restaurants>.row>.cards").click(function() {
+  $(".restaurants>.row>.cards").click(function () {
     console.log(this.cardtext);
     console.log($(".card-text.lng").html());
     // $(this)
@@ -52,47 +54,89 @@ $(document).ready(() => {
     let lng = $(".lng", this).html();
     let loc = new google.maps.LatLng(lat, lng);
     let title = `SPOT`;
-    markerCollection.push({ title: title, lat: lat, lng: lng });
+    // if (markerCollection.length >= 3) {
+    //  let pos = markerCollection.map(function (e) { return e.title; }).lastIndexOf('SPOT');
+    //   markerCollection.pop(pos)
+    // }
+    if (markerCollection.length >= 2) {
+    let pos = markerCollection.map(function (e) { return e.title; }).lastIndexOf('SPOT');
+      markerCollection.pop(pos)
+    }
+    if (markerCollection.length >= 3) {
+      let pos = markerCollection.map(function (e) { return e.title; }).indexOf('SPOT2');
+        markerCollection.pop(pos)
+      }
+
+    markerCollection.push({ title: title, lat: lat, lng: lng, icon: 'http://maps.google.com/mapfiles/ms/micons/restaurant.png' });
     startMap(lat, lng);
+    $(".restaurants").addClass("hidden");
+    $(".rest-btn").removeClass("hidden");
     // addMarker(loc, map);
   });
+  $(".rest-btn").click(function () {
+    $(".restaurants").removeClass("hidden");
+  })
 
-  $(".bars>.row>.cards").click(function() {
+  $(".bars>.row>.cards").click(function () {
     console.log("!!!clicked!!!");
     $(".events").removeClass("hidden");
     let lat = $(".lat", this).html();
     let lng = $(".lng", this).html();
     let loc = new google.maps.LatLng(lat, lng);
     let title = `SPOT2`;
-    markerCollection.push({ title: title, lat: lat, lng: lng });
+    // markerCollection.pop(2)
+    if (markerCollection.length >= 3) {
+     let pos = markerCollection.map(function (e) { return e.title; }).lastIndexOf('SPOT2');
+      markerCollection.pop(pos)
+    }
+    markerCollection.push({ title: title, lat: lat, lng: lng, icon: 'http://maps.google.com/mapfiles/ms/micons/bar.png' });
     startMap(lat, lng);
     // addMarkerB(loc, map);
-    markerCollection.push(lat);
+    // markerCollection.push(lat);
+    $(".bars").addClass("hidden");
+    $(".bar-btn").removeClass("hidden");
+    // addMarker(loc, map);
   });
+  $(".bar-btn").click(function () {
+    $(".bars").removeClass("hidden");
+  })
 
-  $(".events>.row>.cards").click(function() {
+  $(".events>.row>.cards").click(function () {
     console.log("!!!clicked!!!");
     $(".events").removeClass("hidden");
     $("#mapc").removeClass("hidden");
     let lat = $(".lat", this).html();
     let lng = $(".lng", this).html();
     let loc = new google.maps.LatLng(lat, lng);
+    let title = `SPOT3`
+    if (markerCollection.length >= 4) {
+      let pos = markerCollection.map(function (e) { return e.title; }).lastIndexOf('SPOT3');
+       markerCollection.pop(pos)
+     }
+    markerCollection.push({ title: title, lat: lat, lng: lng, icon: 'http://maps.google.com/mapfiles/ms/micons/question.png' });
     startMap(lat, lng);
     // addMarkerC(loc, mapc);
+    $(".events").addClass("hidden");
+    $(".event-btn").removeClass("hidden");
+    // addMarker(loc, map);
   });
+  $(".events-btn").click(function () {
+    $(".events").removeClass("hidden");
+  })
+
 
   function startMap(lat, lng) {
     const ironhackBER = { lat: 52.5053175, lng: 13.3727438 };
 
     // Map initialization
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 14,
+      zoom: 13,
       center: ironhackBER
     });
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        function(position) {
+        function (position) {
           const user_location = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
@@ -104,7 +148,7 @@ $(document).ready(() => {
           // console.log('lat:', lat)
 
           // Add a marker for your user location
-          for(let i =0 ; i<markerCollection.length; i++){
+          for (let i = 0; i < markerCollection.length; i++) {
             console.log(markerCollection[i])
             new google.maps.Marker({
               position: {
@@ -112,18 +156,19 @@ $(document).ready(() => {
                 lng: Number(markerCollection[i].lng)
               },
               map: map,
-              title: "You are here"
+              icon: markerCollection[i].icon,
+              title: "You are here",
             });
           }
         },
-        function() {
+        function () {
           console.log("Error in the geolocation service.");
         }
       );
     } else {
       console.log("Browser does not support geolocation.");
     }
-    ironHackBERMarker
+    // ironHackBERMarker
   }
 
   // startMap();

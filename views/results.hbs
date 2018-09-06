@@ -1,15 +1,24 @@
 <div class="container">
   <div class="card">
+    <div class="loading">LOADING...</div>
     <div id="map" class="hidden"></div>
-    <div class="restaurants">
+    <div class="restaurants hidden">
+    CHOOSE A LOCAL RESTAURANT
       {{> restPartial}}
     </div>
+       <button class="rest-btn hidden" type="submit">Pick a different restaurant</button>
     <div class="bars hidden">
+          CHOOSE A LOCAL BAR
+
       {{> barPartial}}
     </div>
+       <button class="bar-btn hidden" type="submit">Pick a different bar</button>
     <div class="events hidden">
+          CHOOSE A LOCAL EVENT
+
       {{> eventPartial}}
     </div>
+       <button class="event-btn hidden" type="submit">Pick a different event</button>
   </div>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl4-KohgjS2KFG7FZNT21QZZiDeUkioMc"></script>
