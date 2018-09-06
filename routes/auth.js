@@ -204,6 +204,7 @@ const yelp = require('../routes/YelpEventUpdater-copy')
 
 
 router.get("/getcoords", (req, res) => {
+  console.log(yelp)
   yelp.yelpIt()
   console.log(`yelpIt activated`)
 });
