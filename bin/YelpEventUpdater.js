@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const yelp_key = "Bearer _qAdbCs6bFfmv-yAFllNXRJtKeO3MZUvjA274v_Fiof_FiKg4Uchv6JpNbTi3EUWi_wOgMIDIX62gASOOYDmhODB4CdwKrKhtJCrj2QcOkV-q7f1Zgg-B7-FyFqNW3Yx" 
 const mongoose = require("mongoose");
 const Event = require("../models/Event");
 const Venue = require("../models/Venue");
@@ -7,11 +7,13 @@ const axios = require("axios");
 
 const dbName = "ein-tag-in-berlin";
 mongoose.connect(process.env.MONGODB_URI);
-
+console.log(
+  `YELPEventUpdater.js launched: Event venues will be checked with YELP API and assigned coordinates!`
+);
 //CONTROL MAX QUERY LIMIT BASED ON PERFORMANCE
-const queryLimit = 100;
+const queryLimit = 50;
 //LOG TROUBLE VENUES
-let rejections = []
+let rejections = [];
 // let forced= '[ipsə]'
 // console.log(`https://api.yelp.com/v3/businesses/search?term=${forced}&location=Berlin`)
 
@@ -19,32 +21,30 @@ let rejections = []
 
 const yelpIt = async () => {
   const eventArr = await getEvents();
-  eventArrCleaned= []
-  
-  console.log(`event Arr`,eventArr.length)
+  eventArrCleaned = [];
+  console.log(`event Arr`, eventArr.length);
   eventArr.forEach(el => {
-    if(!eventArrCleaned.includes(el.venue)){
-      eventArrCleaned.push(el.venue)
+    if (!eventArrCleaned.includes(el.venue)) {
+      eventArrCleaned.push(el.venue);
     }
   });
-console.log(`cleaned`,eventArrCleaned.length, eventArrCleaned)
-
+  console.log(`eventArrCLeaned is `, eventArrCleaned.length, "long");
   for (let event of eventArrCleaned) {
     try {
       // console.log(eventArr.length)
 
       const title = await getLoc(event);
 
-      console.log(`Venue ${event} yelp'd}`);
+      // console.log(`Venue ${event} yelp'd}`);
 
       await updater(event, title);
     } catch (err) {
-      console.log("There is a problem with", event)
+      console.log("---------------------There is a problem with", event);
       rejections.push(event);
       console.error(err);
     }
   }
-  console.log(rejections.length, `Consider adjusting these venues: `,rejections)
+  console.log(`Rejected venues: `, rejections.length, rejections);
   process.exit(0);
 };
 
@@ -73,7 +73,7 @@ const getLoc = event => {
         {
           headers: {
             Authorization:
-              "Bearer _qAdbCs6bFfmv-yAFllNXRJtKeO3MZUvjA274v_Fiof_FiKg4Uchv6JpNbTi3EUWi_wOgMIDIX62gASOOYDmhODB4CdwKrKhtJCrj2QcOkV-q7f1Zgg-B7-FyFqNW3Yx"
+            yelp_key
           }
         }
       )
@@ -82,7 +82,7 @@ const getLoc = event => {
           return resolve(response.data.businesses[0]);
         } else {
           return resolve({
-//TEMPLEHOFFER FIELD
+            //TEMPLEHOFFER FIELD
             latitude: 52.4757443343279,
             longitude: 13.4018100874023
           });
@@ -98,7 +98,7 @@ const getLoc = event => {
 function updater(event, title) {
   return new Promise((resolve, reject) => {
     Event.updateMany(
-      { venue: event.venue, yelpd:false },
+      { venue: event, yelpd: false },
       {
         yelpd: true,
         coordinates: title.coordinates,
@@ -115,5 +115,3 @@ function updater(event, title) {
 }
 
 yelpIt();
-
-
