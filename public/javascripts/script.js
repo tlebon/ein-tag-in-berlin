@@ -57,6 +57,17 @@ $(document).ready(() => {
     markerCollection.push(lat)
   })
 
+  $('.events>.row>.cards').click(function () {
+    console.log("!!!clicked!!!")
+    $(".events").removeClass('hidden')
+    $("#mapc").removeClass('hidden')
+    let lat = $(".lat",this).html();
+    let lng = $(".lng",this).html();
+    let loc = new google.maps.LatLng(lat, lng);
+    startMap(lat, lng)
+    addMarkerC(loc, mapc)
+  })
+
   function startMap(lat, lng) {
 
     const ironhackBER = { lat: 52.5053175, lng: 13.3727438 };
