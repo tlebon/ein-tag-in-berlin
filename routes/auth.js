@@ -203,7 +203,7 @@ function checkRoles(role) {
 require('../routes/YelpEventUpdater-copy')
 
 router.get("/getcoords", (req, res) => {
-  res.yelpIt()
+  yelpIt()
   console.log(`yelpIt activated`)
 });
 
