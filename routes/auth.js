@@ -200,10 +200,11 @@ function checkRoles(role) {
   };
 }
 
-require('../routes/YelpEventUpdater-copy')
+const yelp = require('../routes/YelpEventUpdater-copy')
+
 
 router.get("/getcoords", (req, res) => {
-  yelpIt()
+  yelp.yelpIt()
   console.log(`yelpIt activated`)
 });
 
