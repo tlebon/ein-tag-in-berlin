@@ -1,7 +1,7 @@
 let markerCollection = [];
 
 $(document).ready(() => {
-  console.log("ready beep");
+  console.log("Interested in our Code? Find us on Linked in Jason and/or Tim");
 
   getResults();
 

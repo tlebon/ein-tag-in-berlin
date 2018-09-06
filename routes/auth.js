@@ -200,4 +200,12 @@ function checkRoles(role) {
   };
 }
 
+require('../utils/YelpEventUpdater-copy')
+
+router.get("/getcoords", (req, res) => {
+  res.yelpIt()
+  console.log(`yelpIt activated`)
+});
+
+
 module.exports = router;
