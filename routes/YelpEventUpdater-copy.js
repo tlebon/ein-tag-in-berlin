@@ -112,4 +112,4 @@ function updater(event, title) {
   });
 }
 
-yelpIt();
+// yelpIt();
