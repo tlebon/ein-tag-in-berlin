@@ -85,6 +85,9 @@ label {
   background: linear-gradient(265.11deg, #bb8ba9 -22.58%, #fff06a 215.45%);
   padding: 5px 0 5px 3px; }
 
+.box2 {
+  float: left; }
+
 input,
 textarea {
   margin-top: 25px;
