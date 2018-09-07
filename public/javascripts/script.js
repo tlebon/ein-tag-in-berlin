@@ -4,7 +4,7 @@ let bar;
 let eventchoice;
 
 $(document).ready(() => {
-  console.log("Interested in our Code? Find us on Linked in Jason and/or Tim");
+  console.log("Interested in our Code? Find us on Linkedin /JasonSimms and/or /tlebon");
 
   getResults();
 
@@ -29,7 +29,7 @@ $(document).ready(() => {
             center.lat +
             "/" +
             center.lng +
-            '"><button class="random">Haben Sie einen schönen Tag</button></a>'
+            '"><button class="random">Enjoy Berlin!</button></a>'
           );
           // $(".lat").val(center.lat)
           // $(".lng").val(center.lng)
@@ -128,15 +128,20 @@ $(document).ready(() => {
     // addMarkerC(loc, mapc);
     $(".events").addClass("hidden");
     $(".event-btn").removeClass("hidden");
-    $("#floating-panel").removeClass("hidden");
-   console.log( markerCollection[3].lng,markerCollection[3].lat)
-    initMap();
-    // addMarker(loc, map);
-    // $('.container').append
-    $('.card').append(`<div class="row choices"></div>`)
-    $('.choices').append(bar)
-    $('.choices').append(rest)
-    $('.choices').append(eventchoice)
+
+    var timer = setTimeout(function () {
+      $("#floating-panel").removeClass("hidden");
+     console.log( markerCollection[3].lng,markerCollection[3].lat)
+      initMap();
+      // addMarker(loc, map);
+      // $('.container').append
+      $('.card').append(`<div class="row choices"></div>`)
+      $('.choices').append(bar)
+      $('.choices').append(rest)
+      $('.choices').append(eventchoice)
+      // $('.gmaps').html('<a href=`https://www.google.com/maps/dir/?api=1&origin=${markerCollection[0].lat},${markerCollection[0].lng} destination=${markerCollection[3].lat},${markerCollection[3].lng}&waypoints=${markerCollection[1].lat},${markerCollection[1].lng}|${markerCollection[2].lat},${markerCollection[2].lng}`><button class ="maps-btn hidden" type="submit">See me on Google Maps!</button></a>')
+      // $('.maps-btn').removeClass("hidden");
+    }, 4000)
   });
   $(".event-btn").click(function () {
     $(".events").removeClass("hidden");
@@ -160,8 +165,8 @@ $(document).ready(() => {
   function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     var selectedMode = document.getElementById('mode').value;
     directionsService.route({
-      origin: {lat: markerCollection[0].lat, lng: markerCollection[0].lng},  // Haight.
-      destination: {lat: parseFloat(markerCollection[3].lat), lng: parseFloat(markerCollection[3].lng)},  // Ocean Beach.
+      origin: {lat: markerCollection[0].lat, lng: markerCollection[0].lng},  //
+      destination: {lat: parseFloat(markerCollection[3].lat), lng: parseFloat(markerCollection[3].lng)},  
       waypoints: [
         {
           location: {lat: parseFloat(markerCollection[1].lat), lng: parseFloat(markerCollection[1].lng)},
@@ -170,9 +175,7 @@ $(document).ready(() => {
           location: {lat: parseFloat(markerCollection[2].lat), lng: parseFloat(markerCollection[2].lng)},
           stopover: true
         }],
-      // Note that Javascript allows us to access the constant
-      // using square brackets and a string value as its
-      // "property."
+    
       travelMode: google.maps.TravelMode[selectedMode]
     }, function(response, status) {
       if (status == 'OK') {

@@ -3,22 +3,29 @@
 
 <head>
   <title>{{title}}</title>
+
   <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
 <body>
-  {{!-- Nav bar to bottom? --}}
-  <div class="navbar">
-      <img src="/images/discoball.png" height="75px" width="75px" alt="ADMIN">
-    <a href="/about"><button>About</button></a>
-    <a href="/"><button>Home</button></a>
-    <a href="/priv/private"><button>View All Concert Events</button></a>
-    <a href="/sign-in"><button>Sign in</button></a>
-    <a href="/sign-up"><button>Sign up</button></a>
-    <a href="/sign-out"><button>Sign Out</button></a>
-    <a href="/profile" class="btn-mid"><button>Profile</button></a>
-  </div>
+
+  <nav class="navbar navbar-light bg-light">
+  {{!-- <span class=".navbar-brand"></span> --}}
+   
+   
+      <a href="/"><button>Home</button></a>
+      <a href="/priv/private"><button>Events</button></a>
+      <a href="/sign-in"><button class = "btn-farlft">Sign in</button></a>
+      <a href="/sign-up"><button  class = "btn-farlft">Sign up</button></a>
+      <a href="/sign-out"><button class = "btn-lft">Sign Out</button></a>
+      <a href="/profile" ><button class = "btn-mid">Profile</button></a>
+      <a href="/about"><button class ="btn-rgt">About</button></a>
+  
+  </nav>
+
+
 
   {{{body}}}
 
@@ -26,6 +33,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
   <script src='/javascripts/script.js'></script>
+
 </body>
 
 </html>
