@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
 * {
+  font-family: 'Titillium Web', sans-serif;
   box-sizing: border-box; }
 
 h3 {
@@ -83,7 +84,7 @@ label {
 
 .navbar {
   width: auto;
-  background: linear-gradient(265.11deg, #bb8ba9 -22.58%, #fff06a 215.45%);
+  background-color: rgba(255, 255, 255, 0);
   padding: 5px 0 5px 3px; }
 
 .box2 {

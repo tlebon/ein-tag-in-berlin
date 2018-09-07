@@ -10,7 +10,9 @@ $color7: #fff06a;
 $colorcard: #fff;
 $colorcards: wheat;
 $colorcardtitle: black;
+$navbackground: rgba(255, 255, 255, 0);
 * {
+  font-family: 'Titillium Web', sans-serif;
   box-sizing: border-box;
 }
 h3 {
@@ -108,8 +110,8 @@ label {
 }
 .navbar {
   width: auto;
-  // background: linear-gradient(to bottom, #0dad82 12%,#0dad8200 52%);
-  background: linear-gradient(265.11deg, $color6 -22.58%, $color7 215.45%);
+  background-color:$navbackground;
+  // background: linear-gradient(265.11deg, $color6 -22.58%, $color7 215.45%);
   // background: linear-gradient(to right, #0dad82 12%,#e59f12 52%,#8b12e8 90%);
   padding: 5px 0 5px 3px;
   //   border: black 1px solid;
