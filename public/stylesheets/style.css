@@ -17,7 +17,8 @@ img {
   max-width: 200px; }
 
 body {
-  margin: 0;
+  width: 90%;
+  margin: 0 auto;
   font: 16px "Montserrat", Helvetica, Arial, sans-serif;
   background: linear-gradient(265.11deg, #bb8ba9 -22.58%, #fff06a 215.45%);
   min-height: 100vh; }
