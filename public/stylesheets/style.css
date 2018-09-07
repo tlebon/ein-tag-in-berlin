@@ -5,20 +5,25 @@
 h3 {
   margin: 3px; }
 
-h6, h7 {
+h6,
+h7 {
   margin: 2px; }
 
 img {
   border-radius: 10px; }
 
+.ourcardimg {
+  max-height: 150px;
+  max-width: 200px; }
+
 body {
   margin: 0;
-  font: 16px 'Montserrat', Helvetica, Arial, sans-serif;
+  font: 16px "Montserrat", Helvetica, Arial, sans-serif;
   background: linear-gradient(265.11deg, #bb8ba9 -22.58%, #fff06a 215.45%);
   min-height: 100vh; }
 
 .container {
-  padding: 25px calc((100% - 960px) / 2); }
+  padding: 25px auto; }
 
 #mode {
   border-radius: 15px; }
@@ -76,8 +81,9 @@ label {
   width: 150px; }
 
 .navbar {
-  padding: 5px 0 5px 3px;
-  border: black 1px solid; }
+  width: auto;
+  background: linear-gradient(265.11deg, #bb8ba9 -22.58%, #fff06a 215.45%);
+  padding: 5px 0 5px 3px; }
 
 input,
 textarea {
@@ -119,7 +125,7 @@ textarea {
   padding: 5px;
   border: 1px solid #999;
   text-align: center;
-  font-family: 'Roboto','sans-serif';
+  font-family: "Roboto", "sans-serif";
   line-height: 30px;
   padding-left: 10px;
   border-radius: 15px; }

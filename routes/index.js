@@ -7,6 +7,10 @@ const Event = require('../models/Event')
 /* GET home page */
 router.get('/', (req, res, next) => {
   res.render('index');
+})
+
+router.get('/about', (req, res, next) => {
+  res.render('about');
 });
 
 function formatDate(date) {
