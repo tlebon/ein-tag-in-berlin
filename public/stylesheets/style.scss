@@ -22,37 +22,44 @@ h7 {
 }
 img {
   border-radius: 10px;
+  margin: 0 auto;
+  display:block;
+
 }
 .ourcardimg {
   max-height: 150px;
   max-width: 200px;
 }
 body {
-  // width: 90%;
-  margin: 0;
+//   width: 90%;
+  margin: 0 auto;
   font: 16px "Montserrat", Helvetica, Arial, sans-serif;
-  background: linear-gradient(265.11deg, $color6 -22.58%, $color7 215.45%);
+//   background: linear-gradient(265.11deg, $color6 -22.58%, $color7 215.45%);
+background: linear-gradient(110deg, #fc9d28 0%,#f28282 28%,#2989d8 66%,#1c418c 100%);
   min-height: 100vh;
+  
 }
 
 .container {
   // padding: 25px calc((100% - 960px) / 2);
   padding: 25px auto;
+  margin: 5px 20px;
 }
 
 #mode {
-  border-radius: 15px;
+    border-radius: 15px;
 }
 .card {
-  padding: 10px;
-  margin: 10px;
+    padding: 10px ;
+    margin: 0 auto;
+    background: #f2f2f2;
   background-color: $colorcard;
   border-radius: 15px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
 }
 .cards {
   padding: 10px;
-  margin: 10px;
+  margin: 0 10px;
   background-color: $colorcards;
   border-radius: 15px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
@@ -81,19 +88,26 @@ button {
   background-color: RGB(49, 186, 141);
   color: #fff;
   border-radius: 15px;
-  padding: 10px 15px;
+  padding: 5px 10px;
   border: none;
   cursor: pointer;
-  min-width: 100px;
+  min-width: 70px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
   transition: 200ms all ease-in-out;
   transform-origin: 50% 50%;
-  margin-bottom: 5px;
+  margin: 5px 0;
+//   margin: 0 auto;
 
   &:hover {
     transform: scale(1.1);
     box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.15);
   }
+}
+.random{
+  min-width: 100px;
+//   border-radius: px;
+  padding: 10px 5px;
+  display:block;
 }
 
 .list-flex {
@@ -108,11 +122,18 @@ label {
 }
 .navbar {
   width: auto;
-  // background: linear-gradient(to bottom, #0dad82 12%,#0dad8200 52%);
+//   background: linear-gradient(to bottom, #0dad82 12%,#0dad8200 52%);
   background: linear-gradient(265.11deg, $color6 -22.58%, $color7 215.45%);
-  // background: linear-gradient(to right, #0dad82 12%,#e59f12 52%,#8b12e8 90%);
+  background: linear-gradient(to right, #0dad82 12%,#e59f12 52%,#8b12e8 90%);
   padding: 5px 0 5px 3px;
-  //   border: black 1px solid;
+    border: black 1px solid;
+}
+
+h1 h2 h3{
+    text-align: center;
+// vertical-align: middle;
+    // display:block;
+
 }
 
 .box2 {
@@ -133,12 +154,25 @@ textarea {
 
 .btn-delete {
   background-color: red;
-  margin-left: 65px;
+  margin:0 auto;
+  display:block;
 }
 
-// .btn-mid{
-//     background-color:#87A542;
-// }
+.btn-mid{
+    background-color:#91A33B
+}
+
+
+.btn-rgt{
+    background-color:#BDA126
+}
+.btn-lft{
+    background-color:#67A653 
+}
+.btn-farlft{
+    background-color:#48A864
+}
+
 
 .row {
   display: flex;
@@ -172,4 +206,15 @@ textarea {
   line-height: 30px;
   padding-left: 10px;
   border-radius: 15px;
+}
+
+.event-cards{
+background-color:$color2
+}
+.bar-cards{
+    background-color:$color3
+}
+
+.rest-cards{
+    background-color:$color1
 }
