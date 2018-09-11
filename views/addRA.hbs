@@ -4,26 +4,27 @@
     <ul>
       <li>
         <a href="/startCrawl" class="post"><button type='submit'>START THE CRAWLER</button></a>
-
+        <p>: Initiates a Resident Advisor crawler via Apify.com. (Needs to be run every 2 days)</p>
       </li>
       <li>
         <a href="/statusCrawl" class="post"><button type='submit'>STATUS OF LAST CRAWLER</button></a>
-
+<p>: Checks Last Crawler if crawler date is today there is no need to run again!</p>
       </li>
       <li>
         <a href="/events/addRAresults" class="get"><button type='submit'>SUBMIT CRAWL</button></a>
-
+<p>: Creates Events in Mongo DB from Crawler</p>
       </li>
       <li>
         <a href="/delete/all" class="get"><button type='submit'>**PURGE EVENTS**</button></a>
-
+<p>: Drops Event DB from Mongo</p>
       </li>
       <li>
         <a href="/jasonsview" method="get"><button>JASONS SECRET STUFF</button></a>
-
+<p>Views A query of acceptable events</p>
       </li>
       <li>
         <a href="/getcoords"method = "get"><button>ASSIGN COORDINATES FOR EVENTS</button></a>
+        <p>Executes Yelp Get Coordinates assigning address info to Events!</p>
       </li>
     </ul>
 
