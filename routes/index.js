@@ -47,7 +47,8 @@ router.get('/locate/:lat/:lng', (req, res, next) => {
   axios(
     url, {
       headers: {
-        'Authorization': 'Bearer _qAdbCs6bFfmv-yAFllNXRJtKeO3MZUvjA274v_Fiof_FiKg4Uchv6JpNbTi3EUWi_wOgMIDIX62gASOOYDmhODB4CdwKrKhtJCrj2QcOkV-q7f1Zgg-B7-FyFqNW3Yx'
+        Authorization:
+        process.env.yelp_key
       }
     })
     .then(result => {
@@ -60,7 +61,8 @@ router.get('/locate/:lat/:lng', (req, res, next) => {
       return axios.get(
         bloop, {
           headers: {
-            'Authorization': 'Bearer _qAdbCs6bFfmv-yAFllNXRJtKeO3MZUvjA274v_Fiof_FiKg4Uchv6JpNbTi3EUWi_wOgMIDIX62gASOOYDmhODB4CdwKrKhtJCrj2QcOkV-q7f1Zgg-B7-FyFqNW3Yx'
+            Authorization:
+            process.env.yelp_key
           }
         })
 
