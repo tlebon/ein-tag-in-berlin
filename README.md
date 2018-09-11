@@ -11,6 +11,6 @@ headers: {
             process.env.yelp_key
           }
 
-2)RA Crawler is now Automated and does not need to be manually initiated.
+2)Crawler Functions are automated to two day intervals.  Add Events and Check Coordinates should be initiated on herokuDeploy with a difference of 5 minutes.
 
 3)routes/YelpEventUpdater.js calls all events from DB and Puts them Through the Yelp API.  Could Be improved with cleaning venue names.**NEEDS .env to run**
