@@ -8,7 +8,7 @@ const axios = require("axios");
 const dbName = "ein-tag-in-berlin";
 mongoose.connect(process.env.MONGODB_URI);
 console.log(
-  `YELPEventUpdater.js launched: Event venues will be checked with YELP API and assigned coordinates!`
+  `From -::BIN/YELPEventUpdater.js launched: Event venues will be checked with YELP API and assigned coordinates!`
 );
 //CONTROL MAX QUERY LIMIT BASED ON PERFORMANCE
 const queryLimit = 50;
