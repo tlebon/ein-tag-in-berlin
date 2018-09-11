@@ -106,30 +106,14 @@ router.get("/statusCrawl", (req, res, next) => {
 });
 /* MAKE SURE TO MAKE THIS AUTHORIZED AND LOGGED IN AS ADMIN */
 router.get("/events/addRAresults", checkRoles('admin'),(req, res, next) => {
-  axios.get(lastExec.lastExec).then(response => {
-    if (response.data[response.data.length - 1].status === `SUCCEEDED`) {
-      apifyAPI.get().then(response => {
-        console.log(`getting: `, resultsHTML.resultsHTML);
-        let results = [];
-        response.data.forEach(el => {
-          if (el != "null") {
-            results.push(el.pageFunctionResult);
-          }
-        });
-        // results.shift()
-        console.log(results, results.length);
-        Event.create(results, err => {
-          if (err) {
-            console.log(`there was 1 error`);
-          }
-          console.log(`Created ${results.length} events maybe`);
-        });
-        res.redirect(`/priv/private`);
-      });
-    } else {
-      console.log(`crawl not finished check apify run page`);
-    }
-  });
+  let autoRAEvents = setInterval(addRAEvents,300000)
+  console.log(`Set Interval of autoRAEvents`)
+});
+
+
+router.get("/events/stopautoevents", checkRoles('admin'),(req, res, next) => {
+   clearInterval(autoRAEvents);
+   console.log(`cleared Interval of autoRAEvents`)
 });
 //PURGE ALL EVENTS
 router.get("/delete/all", checkRoles('admin'), (req, res) => {
@@ -200,14 +184,44 @@ function checkRoles(role) {
   };
 }
 
+function addRAEvents(){
+  axios.get(lastExec.lastExec).then(response => {
+    if (response.data[response.data.length - 1].status === `SUCCEEDED`) {
+      apifyAPI.get().then(response => {
+        console.log(`getting: `, resultsHTML.resultsHTML);
+        let results = [];
+        response.data.forEach(el => {
+          if (el != "null") {
+            results.push(el.pageFunctionResult);
+          }
+        });
+        // results.shift()
+        console.log(results, results.length);
+        Event.create(results, err => {
+          if (err) {
+            console.log(`there was 1 error`);
+          }
+          console.log(`Created ${results.length} events maybe`);
+        });
+        res.redirect(`/priv/private`);
+      });
+    } else {
+      console.log(`crawl not finished check apify run page`);
+    }
+  });
+}
+
 const yelp = require('../routes/YelpEventUpdater-copy')
 
 
 router.get("/getcoords", (req, res) => {
-  console.log(yelp)
-  let autoYelp = setInterval(yelp, 300000)
+  let autoYelp = setInterval(yelp, 17280000000000)
+  console.log(autoYelp)
   console.log(`yelpIt activated`)
 });
 
-
+router.get("/stopyelpevents", (req, res) => {
+  clearInterval(autoYelp)
+  console.log(`autoYelp Interval Cleared`)
+});
 module.exports = router;
