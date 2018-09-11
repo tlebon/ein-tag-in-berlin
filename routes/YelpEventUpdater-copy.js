@@ -1,5 +1,4 @@
 require("dotenv").config();
-// const yelp_key = "Bearer _qAdbCs6bFfmv-yAFllNXRJtKeO3MZUvjA274v_Fiof_FiKg4Uchv6JpNbTi3EUWi_wOgMIDIX62gASOOYDmhODB4CdwKrKhtJCrj2QcOkV-q7f1Zgg-B7-FyFqNW3Yx" 
 const mongoose = require("mongoose");
 const Event = require("../models/Event");
 const Venue = require("../models/Venue");
@@ -19,7 +18,8 @@ const yelpIt = async () => {
   console.log(
     `FROM ::ROUTES/YELPEventUpdater.js launched: Event venues will be checked with YELP API and assigned coordinates!`
   );
-  console.log(process.env.yelp_key)
+  console.log(typeof(process.env.yelp_key))
+  console.log(`key: `, process.env.yelp_key)
   const eventArr = await getEvents();
   eventArrCleaned = [];
   console.log(`event Arr`, eventArr.length);
