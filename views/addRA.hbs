@@ -3,12 +3,12 @@
     <h2>USE THE CUSTOM RA CRAWLER</h2>
     <ul>
       <li>
-        <p>: Initiates a Resident Advisor crawler via Apify.com. (Needs to be run every 2 days)</p>
-        <a href="/startCrawl" class="post"><button type='submit'>START THE CRAWLER</button></a>
-      </li>
-      <li>
         <p>: Checks Last Crawler if crawler date is today there is no need to run again!</p>
         <a href="/statusCrawl" class="post"><button type='submit'>STATUS OF LAST CRAWLER</button></a>
+      </li>
+      <li>
+        <p>: (Crawler is Scheduled on Apify.com now, just submit the last crawl) </p>
+        <a href="/startCrawl" class="post"><button type='submit'>START THE CRAWLER</button></a>
       </li>
       <li>
         <p>: Creates Events in Mongo DB from Crawler</p>

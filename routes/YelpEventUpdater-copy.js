@@ -18,8 +18,8 @@ const yelpIt = async () => {
   console.log(
     `FROM ::ROUTES/YELPEventUpdater.js launched: Event venues will be checked with YELP API and assigned coordinates!`
   );
-  console.log(typeof(process.env.yelp_key))
-  console.log(`key: `, process.env.yelp_key)
+  // console.log(typeof(process.env.yelp_key))
+  // console.log(`key: `, process.env.yelp_key)
   const eventArr = await getEvents();
   eventArrCleaned = [];
   console.log(`event Arr`, eventArr.length);
