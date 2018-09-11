@@ -205,7 +205,7 @@ const yelp = require('../routes/YelpEventUpdater-copy')
 
 router.get("/getcoords", (req, res) => {
   console.log(yelp)
-  yelp()
+  let autoYelp = setInterval(yelp, 300000)
   console.log(`yelpIt activated`)
 });
 
