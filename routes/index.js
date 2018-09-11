@@ -69,7 +69,7 @@ router.get('/locate/:lat/:lng', (req, res, next) => {
           restaurants = result.data.businesses
           // console.log(restaurants)
 
-          return Event.find({ date: today, yelpd:true }, 'name venue image_url url address coordinates.latitude coordinates.longitude',
+          return Event.find({ date: today, yelpd:true }, 'name venue image_url eventUrl address coordinates.latitude coordinates.longitude',
            { limit: 3, 
             sort:{
             coordinates: 1 //Sort by Date Added DESC
