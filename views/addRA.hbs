@@ -1,18 +1,18 @@
 <div class="container">
   <div class="card">
-    <h2>USE THE CUSTOM RA CRAWLER</h2>
+    <h2>Admin Controls are widely automated now!!!</h2>
     <ul>
       <li>
         <p>: Checks Last Crawler if crawler date is today there is no need to run again!</p>
         <a href="/statusCrawl" class="post"><button type='submit'>STATUS OF LAST CRAWLER</button></a>
       </li>
       <li>
-        <p>: (Crawler is Scheduled on Apify.com now, just submit the last crawl) </p>
+        <p>: **No Longer Used** Crawler is scheduled on Apify.com</p>
         <a href="/startCrawl" class="post"><button type='submit'>START THE CRAWLER</button></a>
       </li>
       <li>
-        <p>: Creates Events in Mongo DB from Crawler</p>
-        <a href="/events/addRAresults" class="get"><button type='submit'>SUBMIT CRAWL</button></a>
+        <p>: Set Interval for adding events from Crawler **automated check heroku logs</p>
+        <a href="/events/addRAresults" class="get"><button type='submit'>Create Events on Interval 2Days</button></a>
       </li>
       <li>
         <p>: Clear the autoRAEvents Interval if running</p>
@@ -27,8 +27,8 @@
         <a href="/jasonsview" method="get"><button>JASONS SECRET STUFF</button></a>
       </li>
       <li>
-        <p>:Executes Yelp Get Coordinates assigning address info to Events!</p>
-        <a href="/getcoords" method="get"><button>ASSIGN COORDINATES FOR EVENTS</button></a>
+        <p>:Sets Inteval for checking Coordinates of events **automated check heroku logs</p>
+        <a href="/getcoords" method="get"><button>ASSIGN COORDINATES FOR EVENTS 2Days</button></a>
       </li>
          <li>
         <p>:Clear the autoYelp Interval</p>

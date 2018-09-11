@@ -104,9 +104,11 @@ router.get("/statusCrawl", (req, res, next) => {
     // console.log(response.data)
   });
 });
+
+
 /* MAKE SURE TO MAKE THIS AUTHORIZED AND LOGGED IN AS ADMIN */
 router.get("/events/addRAresults", checkRoles('admin'),(req, res, next) => {
-  let autoRAEvents = setInterval(addRAEvents,300000)
+  let autoRAEvents = setInterval(addRAEvents,17280000000000)
   console.log(`Set Interval of autoRAEvents`)
 });
 
@@ -115,6 +117,7 @@ router.get("/events/stopautoevents", checkRoles('admin'),(req, res, next) => {
    clearInterval(autoRAEvents);
    console.log(`cleared Interval of autoRAEvents`)
 });
+
 //PURGE ALL EVENTS
 router.get("/delete/all", checkRoles('admin'), (req, res) => {
   // res.send(`Events Purged`);
