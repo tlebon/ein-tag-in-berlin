@@ -7,9 +7,6 @@ const axios = require("axios");
 
 const dbName = "ein-tag-in-berlin";
 // mongoose.connect(process.env.MONGODB_URI);
-console.log(
-  `FROM ::ROUTES/YELPEventUpdater.js launched: Event venues will be checked with YELP API and assigned coordinates!`
-);
 //CONTROL MAX QUERY LIMIT BASED ON PERFORMANCE
 const queryLimit = 50;
 //LOG TROUBLE VENUES
@@ -18,6 +15,11 @@ let rejections = [];
 /* MASTER FUNCTION */
 
 const yelpIt = async () => {
+  
+  console.log(
+    `FROM ::ROUTES/YELPEventUpdater.js launched: Event venues will be checked with YELP API and assigned coordinates!`
+  );
+  console.log(process.env.yelp_key)
   const eventArr = await getEvents();
   eventArrCleaned = [];
   console.log(`event Arr`, eventArr.length);
@@ -71,7 +73,7 @@ const getLoc = event => {
         {
           headers: {
             Authorization:
-            process.env.MONGODB_URI.yelp_key
+            process.env.yelp_key
           }
         }
       )
