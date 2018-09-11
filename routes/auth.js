@@ -108,8 +108,9 @@ router.get("/statusCrawl", (req, res, next) => {
 
 /* MAKE SURE TO MAKE THIS AUTHORIZED AND LOGGED IN AS ADMIN */
 router.get("/events/addRAresults", checkRoles('admin'),(req, res, next) => {
-  let autoRAEvents = setInterval(addRAEvents,17280000000000)
-  console.log(`Set Interval of autoRAEvents`)
+  addRAEvents();
+  // let autoRAEvents = setInterval(addRAEvents,17280000000000)
+  // console.log(`Set Interval of autoRAEvents`)
 });
 
 
@@ -218,8 +219,9 @@ const yelp = require('../routes/YelpEventUpdater-copy')
 
 
 router.get("/getcoords", (req, res) => {
-  let autoYelp = setInterval(yelp, 17280000000000)
-  console.log(autoYelp)
+  yelp();
+  // let autoYelp = setInterval(yelp, 17280000000000)
+  // console.log(autoYelp)
   console.log(`yelpIt activated`)
 });
 
