@@ -6,6 +6,9 @@
     "start": "node ./bin/www",
     "dev": "DEBUG=ein-tag-in-berlin:* nodemon ./bin/www"
   },
+  "engines": {
+    "node": "8.11.4"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "bcrypt": "^3.0.0",
