@@ -10,41 +10,46 @@ mongoose.connect(process.env.MONGODB_URI);
 const queryLimit = 50;
 //LOG TROUBLE VENUES
 let rejections = [];
-// let forced= '[ipsə]'
-// console.log(`https://api.yelp.com/v3/businesses/search?term=${forced}&location=Berlin`)
-
+let yelpRunning;
 /* MASTER FUNCTION */
 
 const yelpIt = async () => {
   console.log(
     `From -::BIN/YELPEventUpdater.js launched: Event venues will be checked with YELP API and assigned coordinates!`
   );
-  console.log(process.env.MONGODB_URI.yelp_key)
-  const eventArr = await getEvents();
-  eventArrCleaned = [];
-  console.log(`event Arr`, eventArr.length);
-  eventArr.forEach(el => {
-    if (!eventArrCleaned.includes(el.venue)) {
-      eventArrCleaned.push(el.venue);
+  if(!yelpRunning){
+
+    yelpRunning = true;
+    const eventArr = await getEvents();
+    eventArrCleaned = [];
+    console.log(`event Arr`, eventArr.length);
+    eventArr.forEach(el => {
+      if (!eventArrCleaned.includes(el.venue)) {
+        eventArrCleaned.push(el.venue);
+      }
+    });
+    console.log(`eventArrCLeaned is `, eventArrCleaned.length, "long");
+    for (let event of eventArrCleaned) {
+      try {
+        // console.log(eventArr.length)
+        
+        const title = await getLoc(event);
+        
+        // console.log(`Venue ${event} yelp'd}`);
+        
+        await updater(event, title);
+      } catch (err) {
+        console.log("---------------------There is a problem with", event);
+        rejections.push(event);
+        console.error(err);
+      }
     }
-  });
-  console.log(`eventArrCLeaned is `, eventArrCleaned.length, "long");
-  for (let event of eventArrCleaned) {
-    try {
-      // console.log(eventArr.length)
-
-      const title = await getLoc(event);
-
-      // console.log(`Venue ${event} yelp'd}`);
-
-      await updater(event, title);
-    } catch (err) {
-      console.log("---------------------There is a problem with", event);
-      rejections.push(event);
-      console.error(err);
-    }
+    console.log(`Rejected venues: `, rejections.length, rejections);
+    yelpRunning= false;
+    console.log(`yelpRunning =`,yelpRunning)
+  }else{
+    console.log(`Yelp crawler already running`)
   }
-  console.log(`Rejected venues: `, rejections.length, rejections);
   process.exit(0);
 };
 
